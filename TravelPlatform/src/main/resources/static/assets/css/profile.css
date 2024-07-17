@@ -1,0 +1,471 @@
+/*html {*/
+/* 	margin: 0; */
+/*	padding: 0; */
+/*	display: flex;*/
+/*	flex-direction: column;*/
+/*	    justify-content: space-between;*/
+/*	background-color: #FAF3E0;*/
+
+/*}*/
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    width: 100%;
+    /* Adjust as needed */
+    max-width: 1325px;
+    height: 100vh;
+    /* Adjust maximum width */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin 추가 */
+}
+
+header#header.alt {
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 100%; /* 전체 너비로 설정 */
+    height: 60px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    max-width: 1325px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin 추가 */
+}
+
+header#header h5#logo a {
+	margin-top: 1%;
+    margin-right: auto;
+    padding: 10px 15px;
+}
+
+
+header#header nav#nav ul {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+header#header nav#nav ul li {
+    margin-right: 10px;
+}
+
+header#header nav#nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 8px 15px;
+    display: block;
+}
+
+header#header nav#nav ul li a:hover {
+	transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button {
+    background-color: transparent;
+    color: #fff;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button:hover {
+	transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+}
+
+/* 페이지의 주요 콘텐츠 영역 */
+.content {
+	flex: 1;
+	/* 콘텐츠 영역이 가용 공간을 채우도록 설정 */
+}
+
+body {
+
+	padding-top: 60px;
+}
+
+.header{
+	max-width: 1200px;
+	background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items:center;
+}
+.navbar{
+	align-items:center;
+	justify-content:space-between;
+}
+h3 {
+	font-weight: bold;
+}
+
+/* 기본 상태 스타일 */
+.nav-link {
+	display: block;
+	padding: 15px;
+	color: #666;
+	text-decoration: none;
+	background-color: #fff;
+	transition: background-color 0.5s, color 0.5s;
+}
+
+/* :hover 상태 스타일 */
+.nav-link:hover {
+	cursor: pointer;
+	background-color: #f4f6fa;
+	color: #003d7a;
+}
+
+/* .active 상태 스타일 */
+.nav-pills .nav-link.active {
+	color: rgb(0, 0, 255);
+	padding: 15px;
+	background-color: #eff5ff;
+	font-weight: 500;
+}
+
+
+
+.left-panel {
+	background-color: white;
+	border-right: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+	.left-panel {
+		display: none;
+	}
+}
+
+.user-info-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	/* 각 .user-info 사이의 간격 */
+}
+
+.user-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/* 모든 user-info 항목을 동일한 너비로 설정 */
+	width: 100%;
+}
+
+label {
+	font-size: 12px;
+}
+
+.user-info-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/* 좌측 정렬 */
+	justify-content: center;
+	/* 세로 방향 중앙 정렬 */
+	border: 1px solid #fafafa;
+	background-color: #fafafa;
+	color: rgb(128, 128, 128);
+	border-radius: 10px;
+	width: 100%;
+	height: 40px;
+	padding: 0 10px;
+}
+
+.nickname-form {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	/* 폼의 너비를 100%로 설정 */
+}
+
+.user-nickname {
+	border: 1px solid #fafafa;
+	background-color: #fafafa;
+	border-radius: 10px;
+	height: 40px;
+	padding: 0 10px;
+	margin-right: 10px;
+	/* 버튼과의 간격 추가 */
+	flex-grow: 1;
+	/* 입력란이 가능한 최대 너비를 차지하도록 설정 */
+}
+.row{
+	height: 100%;
+}
+.btn {
+	background-color: #5b7484;
+	color: white;
+}
+.btn:hover {
+	background-color: #fff;
+	border: 1px solid black;
+	color: black;
+}
+
+.btn-save {
+	height: 40px;
+	width: 80px;
+	/* 버튼 너비 설정 */
+	border: none;
+	background-color: #007bff;
+	color: white;
+	border-radius: 10px;
+	cursor: pointer;
+	/* 오른쪽 정렬을 위해 margin-left를 설정 */
+	margin-left: auto;
+}
+
+
+.form-container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	margin-right: 20px;
+	box-sizing: border-box;
+}
+
+.form-group:last-child {
+	margin-right: 0;
+}
+
+.form-group label {
+	margin-bottom: 5px;
+}
+
+.form-group input {
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.form-group.button-group {
+	flex: 0 0 150px;
+	/* 고정된 너비를 설정 */
+	display: flex;
+	align-items: flex-end;
+}
+
+.password-error {
+	color: red;
+}
+
+.btn-container button {
+	width: 100%;
+	white-space: nowrap;
+	/* 버튼 텍스트가 줄 바꿈되지 않도록 설정 */
+	margin-top: 15px;
+}
+
+.p {
+	text-align: right;
+}
+
+.right-panel {
+	background-color: white;
+	padding: 20px;
+	border-right: 1px solid #ddd;
+}
+
+.tab-content {
+	margin-top: 50px;
+}
+
+.h3 {
+	margin-top: 50px;
+}
+
+.nav {
+	margin-top: 30px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.container-nav {
+	background-color: black;
+}
+
+.password-error {
+	color: red;
+	font-size: 12px;
+}
+
+/* ==============================================================게시글 , 찜 목록*/
+/* 게시글 및 찜 목록의 이미지 */
+.img {
+	flex-shrink: 0;
+	width: 100px;
+	height: 100px;
+	margin-right: 15px;
+}
+
+.img img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+/* 게시글 및 찜 목록의 콘텐츠 컨테이너 */
+.content-container {
+	display: flex;
+	/*    flex-direction: column;*/
+	flex-grow: 1;
+	justify-content: space-between;
+	max-width: 100%;
+	/* 부모 div의 너비를 넘지 않도록 설정 */
+	overflow: hidden;
+}
+
+/* 제목 스타일링 */
+.board-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+	/* 제목이 넘칠 경우 숨김 */
+}
+
+.board-title h6 {
+	justify-content: space-between;
+	font-size: 1.25rem;
+	font-weight: 400;
+	margin-bottom: 15px;
+	color: #333;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.board-title .board-writer,
+.board-title .board-createdate {
+
+	font-size: 0.875rem;
+	color: #999;
+}
+
+.badge {
+	color: #999;
+}
+
+.board-count {
+	color: #999;
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.board-cnt {
+	color: #999;
+	display: flex;
+	align-items: center;
+}
+
+
+.go-post {
+	text-decoration: none;
+	/* 링크에 밑줄 제거 */
+}
+
+
+/*.board-stats{*/
+/*	color: #999;*/
+/*	align-items: flex-end;*/
+/*}*/
+/* 기본 이미지 및 게시글 이미지 컨테이너 */
+.img-thumbnail {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+/* 게시글 목록 항목의 여백 및 스타일링 */
+.go-post {
+	text-decoration: none;
+	/* 링크에 밑줄 제거 */
+}
+
+
+.d-flex {
+	display: flex;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+/* 기본 이미지 */
+.img-thumbnail.default {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+/* 콘텐츠를 감싸는 div 스타일링 */
+.content-container {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	/*    background-color: #f9f9f9;*/
+}
+
+/* 목록 항목을 강조하기 위한 스타일 */
+.board-li {
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	/* 여기서 border를 제거합니다 */
+	margin: 20px 0;
+	/* 상하 여백 추가 */
+}
+
+.unregister {
+	margin-top: 40%;
+}
+
+.float-end a {
+
+	text-decoration: none;
+	/* 링크에 밑줄 제거 */
+	color: #007bff;
+	/* 링크 색상 설정 */
+}
+
+.float-end a:hover {
+	text-decoration: underline;
+	/* 링크에 마우스를 올렸을 때 밑줄 추가 */
+
+}
+@media (min-width:300px) and (max-width:530px) {
+    header#header.alt {
+        width: 100%; /* 컨테이너와 같은 너비로 설정 */
+    }
+    header#header nav#nav ul li a:not(.button) {
+        display: none; /* 로고와 로그아웃 버튼 제외하고 나머지 숨김 */
+    }
+}

@@ -1,0 +1,883 @@
+/* 팝업창 스타일 */
+/*.popup {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 450px;
+}
+
+.popup-detail {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: left;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+    
+}
+
+ 닫기 버튼 스타일 
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+ 팝업 내용 스타일 
+#popup-images img {
+    max-width: 800px;
+    width: 100%;
+    max-height: 400px;
+    height: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.date-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.date-container img {
+	margin-right: 10px;
+}
+
+ 위치 정보 스타일 
+.location-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.location-container img {
+    margin-right: 10px;  이미지와 텍스트 사이에 간격 추가 
+}
+
+
+.popup-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup-section-header h2 {
+    padding-left: 50px;
+    flex: 1 1 auto;
+    text-align: center;
+    margin-left: 80px;
+}
+
+.popup-section-seconde-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.location-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.location-container img {
+    max-width: 20px;  이미지 사이즈 조정 
+}
+
+.popup-section {
+    margin-bottom: 15px;
+}
+
+
+#popup-title {
+	text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#popup-content{
+	font-size: 16px;
+    margin: 0;
+    color: #555;
+    margin-top: 20px;
+    max-height: 335px;  원하는 높이 설정 
+    overflow-y: auto;  세로 스크롤을 사용하여 내용이 넘칠 경우 스크롤 생성 
+    white-space: pre-wrap;  줄 바꿈을 유지하고 공백을 유지합니다. 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+#popup-date, #popup-location, #popup-listNumber {
+    font-size: 16px;
+    margin: 0;
+    color: #555;
+}
+
+ 버튼 스타일 
+.popup-buttons {
+    text-align: center;
+}
+
+button {
+    background-color: #2e9cdf;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #2380b8;
+}*/
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 450px;
+}
+
+.popup-detail {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: left;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+    
+}
+
+ /*닫기 버튼 스타일 */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+ /*팝업 내용 스타일 */
+#popup-images img {
+    max-width: 800px;
+    width: 100%;
+    max-height: 400px;
+    height: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.date-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.date-container img {
+	margin-right: 10px;
+}
+
+ /*위치 정보 스타일 */
+.location-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.location-container img {
+    margin-right: 10px;  /*이미지와 텍스트 사이에 간격 추가*/ 
+}
+
+
+.popup-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup-section-header h2 {
+    padding-left: 50px;
+    flex: 1 1 auto;
+    text-align: center;
+    margin-left: 80px;
+}
+
+.popup-section-seconde-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+    padding: 15px;
+}
+
+.location-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.location-container img {
+    max-width: 20px;   
+}
+
+.popup-section {
+    margin-bottom: 15px;
+}
+
+
+#popup-title {
+	text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#popup-content{
+	font-size: 16px;
+    margin: 0;
+    color: #555;
+    margin-top: 20px;
+    max-height: 335px;   
+    overflow-y: auto;   
+    white-space: pre-wrap; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    width: 360px;
+}
+
+#popup-date, #popup-location, #popup-listNumber {
+    font-size: 16px;
+    margin: 0;
+    color: #555;
+}
+
+ 
+.popup-buttons {
+    text-align: center;
+}
+
+button {
+    background-color: #2e9cdf;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #2380b8;
+}
+
+
+
+section {
+	display: flex;
+	width: 100%;
+	gap: 10px;
+ 	justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 캐러셀 스타일 */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+	width: 500px;
+    display: block;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*WishDiaryPopup*/
+
+/* 팝업창 스타일 */
+.wish-popup {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 450px;
+}
+
+.wish-popup-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: right;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 닫기 버튼 스타일 */
+.wish-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.wish-close-button:hover {
+    color: #333;
+}
+
+/* 팝업 내용 스타일 */
+#wish-popup-images img {
+    max-width: 800px;
+    width: 100%;
+    max-height: 400px;
+    height: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.wish-date-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.wish-date-container img {
+	margin-right: 10px;
+}
+
+/* 위치 정보 스타일 */
+.wish-location-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.wish-location-container img {
+    margin-right: 10px; /* 이미지와 텍스트 사이에 간격 추가 */
+}
+
+
+.wish-popup-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wish-popup-section-header h2 {
+    padding-left: 50px;
+    flex: 1 1 auto;
+    text-align: center;
+    margin-left: 80px;
+}
+
+.wish-popup-section-seconde-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.wish-location-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wish-location-container img {
+    max-width: 20px; /* 이미지 사이즈 조정 */
+}
+
+.wish-popup-section {
+    margin-bottom: 100px;
+}
+
+
+#wish-popup-title {
+	text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#wish-popup-content{
+	font-size: 16px;
+    margin: 0;
+    color: #555;
+    text-align: left;
+    margin-top: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+
+#wish-popup-date, #wish-popup-location, #wish-popup-listNumber {
+    font-size: 16px;
+    margin: 0;
+    color: #555;
+}
+
+/* 버튼 스타일 */
+.wish-popup-buttons {
+    text-align: center;
+}
+
+button {
+    background-color: #2e9cdf;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #2380b8;
+}
+
+
+
+
+
+
+
+
+
+
+/*----------Mobile--------*/
+
+
+@media (min-width:300px) and (max-width:450px) {
+	
+	.popup {
+	    display: none;
+	    position: fixed;
+	    top: 51%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    z-index: 1000;
+	    width: 100%;
+	    max-width: 400px;
+	    height: 100%;
+	    max-height: 700px;
+	}
+	
+	.popup-detail {
+	    background: #fff;
+	    padding: 15px;
+	    border-radius: 10px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	    width: 320px;
+	    text-align: left;
+	    position: relative;
+	    animation: fadeIn 0.3s ease-in-out;
+	    margin: 0 1.5em;
+	}
+	
+	 
+	.close-button {
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    font-size: 24px;
+	    color: #aaa;
+	    cursor: pointer;
+	    transition: color 0.3s ease;
+	}
+	
+	.close-button:hover {
+	    color: #333;
+	}
+	
+	 
+	#popup-images img {
+	    max-width: 800px;
+	    width: 100%;
+	    max-height: 400px;
+	    height: 100%;
+	    border-radius: 5px;
+	}
+	
+	.date-container {
+	    display: flex;
+	    justify-content: flex-end
+	}
+	
+	.date-container img {
+		margin-right: 10px;
+	}
+	
+	  
+	.location-container {
+	    display: flex;
+	    justify-content: flex-end
+	}
+	
+	.location-container img {
+	    margin-right: 10px;   
+	}
+	
+	
+	.popup-section-header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    flex-wrap: wrap;
+	    gap: 10px;
+	    text-align: center;
+	}
+	
+	.popup-section-header h2 {
+	    padding-left: 50px;
+	    flex: 1 1 auto;
+	    text-align: center;
+	    margin-left: 80px;
+	}
+	
+	.popup-section-seconde-header {
+	    display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 3px;
+        justify-content: space-evenly;
+	}
+	
+	.location-container {
+	    display: flex;
+	    align-items: center;
+	    gap: 5px;
+	}
+	
+	.location-container img {
+	    max-width: 20px;   
+	}
+	
+	.popup-section {
+	    
+	}
+	
+	
+	#popup-title {
+		text-align: center;
+	    font-size: 20px;
+	    margin-bottom: 10px;
+	    color: #333;
+	}
+	
+	#popup-content{
+		font-size: 15px;
+	    margin: 0;
+	    color: #555;
+	    width: 289px;
+	    height: 100px;   
+	    overflow-y: auto;   
+	    white-space: pre-wrap; 
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    padding: 15px;
+	}
+	
+	#popup-date, #popup-location, #popup-listNumber {
+	    font-size: 13px;
+	    margin: 0;
+	    color: #555;
+	}
+	
+	 
+	.popup-buttons {
+	    text-align: center;
+	}
+	
+	button {
+	    background-color: #2e9cdf;
+	    color: white;
+	    border: none;
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    border-radius: 5px;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease;
+	    margin: 5px;
+	}
+	
+	button:hover {
+	    background-color: #2380b8;
+	}
+
+
+	section {
+	 	display: flex;
+	    width: 100%;
+	    justify-content: space-around;
+	    flex-direction: column;
+	}
+
+
+
+	.wish-popup {
+	    display: none;
+	    position: fixed;
+	    top: 25%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    z-index: 1000;
+	    width: 100%;
+	    max-width: 800px;
+	    height: 100%;
+	    max-height: 450px;
+	}
+	
+	.wish-popup-content {
+	    background: #fff;
+	    padding: 30px;
+	    border-radius: 10px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	    width: 100%;
+	    text-align: right;
+	    position: relative;
+	    animation: fadeIn 0.3s ease-in-out;
+	}
+	
+	/* 닫기 버튼 스타일 */
+	.wish-close-button {
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    font-size: 24px;
+	    color: #aaa;
+	    cursor: pointer;
+	    transition: color 0.3s ease;
+	}
+	
+	.wish-close-button:hover {
+	    color: #333;
+	}
+	
+	/* 팝업 내용 스타일 */
+	#wish-popup-images img {
+	    max-width: 800px;
+	    width: 100%;
+	    max-height: 400px;
+	    height: 100%;
+	    margin-bottom: 15px;
+	    border-radius: 5px;
+	}
+	
+	.wish-date-container {
+	    display: flex;
+	    justify-content: flex-end
+	}
+	
+	.wish-date-container img {
+		margin-right: 10px;
+	}
+	
+	/* 위치 정보 스타일 */
+	.wish-location-container {
+	    display: flex;
+	    justify-content: flex-end
+	}
+	
+	.wish-location-container img {
+	    margin-right: 10px; /* 이미지와 텍스트 사이에 간격 추가 */
+	}
+	
+	
+	.wish-popup-section-header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    flex-wrap: wrap;
+	    gap: 10px;
+	    text-align: center;
+	    margin-bottom: 20px;
+	}
+	
+	.wish-popup-section-header h2 {
+	    padding-left: 50px;
+	    flex: 1 1 auto;
+	    text-align: center;
+	    margin-left: 80px;
+	}
+	
+	.wish-popup-section-seconde-header {
+	    display: flex;
+	    flex-direction: column;
+	    align-items: flex-end;
+	    gap: 5px;
+	}
+	
+	.wish-location-container {
+	    display: flex;
+	    align-items: center;
+	    gap: 5px;
+	}
+	
+	.wish-location-container img {
+	    max-width: 20px; /* 이미지 사이즈 조정 */
+	}
+	
+	.wish-popup-section {
+	    margin-bottom: 100px;
+	}
+	
+	
+	#wish-popup-title {
+		text-align: center;
+	    font-size: 24px;
+	    margin-bottom: 10px;
+	    color: #333;
+	}
+	
+	#wish-popup-content{
+		font-size: 16px;
+	    margin: 0;
+	    color: #555;
+	    text-align: left;
+	    margin-top: 20px;
+	    max-height: 600px;
+	    overflow-y: auto;
+	    white-space: pre-wrap;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    padding: 15px;
+	}
+	
+	
+	#wish-popup-date, #wish-popup-location, #wish-popup-listNumber {
+	    font-size: 16px;
+	    margin: 0;
+	    color: #555;
+	}
+	
+	/* 버튼 스타일 */
+	.wish-popup-buttons {
+	    text-align: center;
+	}
+	
+	button {
+	    background-color: #2e9cdf;
+	    color: white;
+	    border: none;
+	    padding: 5px 8px;
+	    font-size: 12px;
+	    border-radius: 5px;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease;
+	    margin: 5px;
+	}
+	
+	button:hover {
+	    background-color: #2380b8;
+	}
+	
+
+}	
+	

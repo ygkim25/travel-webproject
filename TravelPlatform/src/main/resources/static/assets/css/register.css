@@ -1,0 +1,152 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.form-control {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.register-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 320px;
+    border: 1px solid #ccc; /* 테두리 추가 */
+}
+.register-header {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.register-header h5 {
+    font-size: 12px;
+    margin: 0;
+    background-color: white;
+    padding: 0 5px;
+    z-index: 1; /* 텍스트를 위로 띄웁니다 */
+    color: rgb(128, 128, 128);
+}
+
+.register-header::before, .register-header::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid #ccc;
+    margin: 0 5px;
+    z-index: 0; /* 구분선을 텍스트 아래로 내립니다 */
+}
+
+.password-error{
+	margin-top: 5px;
+	color: red;
+	font-size: 12px;
+}
+.password-success{
+	margin-top: px;
+	color: blue;
+	font-size: 12px;
+}
+.find-success{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 15px;
+	color: #333;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: black;
+    text-align: center; /* 가운데 정렬 */
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+.authentication-btn {
+	background-color: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+.authentication-btn:hover{
+	background-color: rgb(73, 73, 73);
+}
+.success-btn {
+	background-color: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;	
+}
+.success-btn:hover{
+	background-color: rgb(73, 73, 73);
+}
+.register-btn {
+	background-color: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;	
+}
+.register-btn:hover{
+	background-color: rgb(73, 73, 73);
+}
+.unregister-btn{
+	background-color: rgb(255, 0, 0);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;	
+}

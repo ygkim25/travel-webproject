@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>커뮤니티</title>
+	<meta name="viewport" content="width-device-width, initial-scale=1, user-scalable=no" />
+	<!--link -->
+	<link rel="stylesheet" href="/assets/css/community.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- noscript-->
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<!--jquery-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body class="index is-preload">
+	<div id="page-wrapper">
+		<!--Header-->
+		<header>
+			<div class="banner">
+				<img src="/images/logo.png" alt="Logo" class="mainLogo" onclick="location.href='/main'"><br />
+				<div class="login-box" th:if="${isLoggedIn}">
+					<a th:href="@{/main/profile/user-info}" th:text="${nickname != null ? nickname + ' 님' : '닉네임을 설정해주세요.'}"
+						class="welcome-message m-0" id="welcomeMessage"></a>
+				</div>
+				<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+					<button id="logout-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+				</form>
+				<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+					<button id="login-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그인</button>
+				</form>
+
+				<a href="#" class="menu-btn" id="menu-btn">
+					<span>Menu</span>
+					<div></div>
+				</a>
+				<div class="menu" id="menu">
+					<ul>
+						<li>
+							<input type="search" placeholder="검색" aria-label="Search">
+							<button class="btn btn-outline-light btn-lg" id="m-search-button" type="submit">검색</button>
+
+						</li>
+						<li>
+							<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+								<button id="m-logout-button" type="submit"
+									class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+							</form>
+							<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+								<button id="m-login-button" type="submit"
+									class="btn btn-outline-light btn-lg ms-2">로그인</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<!--Banner-->
+		<section id="welcome">
+<!--			<img src="/images/comm.jpg" alt="" />-->
+			<div class="inner">
+				<h2>커뮤니티</h2>
+				<p>
+					다른 유저들에게 
+					<br>
+					소중한 여행 경험을
+					<br>
+					공유해요
+					<br>
+				</p>
+			</div>
+		</section>
+
+		<!--Ma1in-->
+		<!--Article Start-->
+		<article id="main">
+
+			<!--One-->
+			<section class="wrapper style2 container special-alt">
+				<div class="row"><!--Flex-->
+					<div class="col">
+						<!-- Wrapper1 -->
+						<section id="wrapper1">
+							
+							<!-- Content 1 -->
+							<div class="wrapper2 num1">
+								<div class="inner">
+									<h3> 유저 조회수 Top 5 게시글</h2>
+
+									<section class="features1 num1">
+										<article th:each="board, state : ${topResult.getContent()}" class="topPage"
+											th:data-board-seq="${board.seq}">
+											<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="image">
+												<div class="image-wrapper">
+													<th:block th:if="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{'/upload/' + ${board.writer} + '/' + ${board.ProcessedFileNames[0]}}"
+															th:attr="alt='No image uploaded by user'"
+															onerror="this.onerror=null; this.src='/images/visit7.jpg';" />
+													</th:block>
+													<th:block
+														th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{/images/visit4.jpg}" alt="placeholder" />
+													</th:block>
+												</div>
+											</a>
+											<h5 class="major" th:text="${board.title}"></h5>
+										</article>
+									</section>
+								</div>
+							</div>
+
+							<!-- Content 2 -->
+							<div class="wrapper2">
+								<div class="inner">
+									<h3 class="top-post"> 유저 좋아요 Top 5 게시글</h2>
+									<section class="features1 num1">
+										<article th:each="board, state : ${recResult.content}" class="topPage"
+											th:data-board-seq="${board.seq}">
+											<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="image">
+												<div class="image-wrapper">
+													<th:block th:if="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{'/upload/' + ${board.writer} + '/' + ${board.ProcessedFileNames[0]}}"
+															th:attr="alt='No image uploaded by user'"
+															onerror="this.onerror=null; this.src='/images/visit7.jpg';" />
+													</th:block>
+													<th:block
+														th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{/images/visit4.jpg}" alt="placeholder" />
+													</th:block>
+												</div>
+											</a>
+											<h5 class="major" th:text="${board.title}"></h5>
+										</article>
+									</section>
+								</div>
+							</div>
+							<!-- Search Function -->
+							<div class="wrapper2">
+								<div class="inner">
+												<h3>추천 게시글</h3>
+									<section class="features1 num1">
+										<th:block th:if="${recommendedBoards != null}">
+
+												<article th:each="board, state : ${recommendedBoards}" class="topPage"
+													th:data-board-seq="${board.seq}">
+													<a th:href="@{/main/community/post-detail(seq=${board.seq})}"
+														class="image">
+														<div class="image-wrapper">
+															<th:block
+																th:if="${not #lists.isEmpty(board.ProcessedFileNames)}">
+																<img th:src="@{'/upload/' + ${board.writer} + '/' + ${board.ProcessedFileNames[0]}}"
+																	th:attr="alt='No image uploaded by user'"
+																	onerror="this.onerror=null; this.src='/images/visit7.jpg';" />
+															</th:block>
+															<th:block
+																th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}">
+																<img th:src="@{/images/visit4.jpg}" alt="placeholder" />
+															</th:block>
+														</div>
+													</a>
+													<h5 class="major" th:text="${board.title}"></h4>
+												</article>
+
+										</th:block>
+									</section>
+								</div>
+							</div>
+							<div class="wrapper2">
+								<div class="inner">
+									<h2>전체 글</h2>
+									<!--검색 기능-->
+
+									<div class="container" id="searchForm">
+										<form th:action="@{/main/community}" method="get" id="boardForm">
+											<input type="hidden" id="curPage" name="curPage" th:value="0" />
+											<input type="hidden" id="rowSizePerPage" name="rowSizePerPage"
+												th:value="${rp}" />
+
+											<div class="search-option">
+												<select class="form-select" id="searchType" name="searchType">
+													<option value="">검색</option>
+													<option value="title" th:selected="${st}=='title'">&laquo 제목</option>
+													<option value="writer" th:selected="${st}=='writer'">&laquo 작성자</option>
+													<option value="content" th:selected="${st}=='content'">&laquo 내용</option>
+												</select>
+											</div>
+											<div class="search-input">
+												<input class="form-control me-2" name="searchWord" type="text"
+													placeholder="검색할 단어를 입력하세요!"/>
+											</div>
+											<div class="search-btn btn-group">
+												<input type="submit" class="col-1 btn btn-primary me-2" value="검색" />
+												<input type="reset" id="btnReset" class="col-1 btn btn-primary me-2"
+													value="초기화" />
+
+												<button type="button" onclick="location.href='/main/community/write'" class="insert-btn">
+													글등록
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section><!-- Wrapper 1 -->
+					</div>
+					<!--==============================================================================================-->
+					<!--Three-->
+
+					<!--==============================================================================================-->
+					<div class="col-table">
+						<div class="two-column-table">
+							<span th:text="| 총 ${pagedResult.getTotalElements()}건의 검색결과 : |"
+								style="margin: 0; font-size: 0.8em;"></span>
+							<span></span>
+							<th:block th:if="${pagedResult != null}">
+								<section>
+									<table class="table text-center table-hover" id="mainTable1">
+									
+										<tbody>
+											<tr th:each="board, iterStat : ${pagedResult.getContent()}"
+												th:if="${iterStat != null and iterStat.index < #lists.size(pagedResult.content)/2}"
+												th:data-board-seq="${board.seq}">
+												<td class="thumbnail">
+													<th:block th:if="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+															alt="placeholder"
+															onerror="this.onerror=null; this.src='images/visit7.jpg';"
+															class="error-image" />
+													</th:block>
+													<th:block
+														th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{/images/visit4.jpg}" alt="placeholder" width="100"
+															height="100" />
+													</th:block>
+												</td>
+												<td class="ellipsis">
+													<span>
+														<strong th:text="${board.title}"></strong>
+													</span>
+													<br>
+													<span th:text="${board.nickname}" class="boardWriter"></span>
+													<br>
+													<span th:text="${board.createDate}" class="boardDate"></span>														
+												</td>
+												
+												<td class="comment">
+													<i class="fas fa-comments"></i>
+													<span class="badge" th:text="${board.commentCount}"></span>
+													<br>
+													<i class="fas fa-eye"></i>
+													<span class="bcnt" th:text="${board.cnt}"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</section>
+							</th:block>
+							<th:block th:if="${pagedResult != null}">
+								<section>
+									<table class="table text-center table-hover" id="mainTable2">
+									
+										<tbody>
+											<tr th:each="board, iterStat : ${pagedResult.getContent()}"
+												th:if="${iterStat != null and iterStat.index >= #lists.size(pagedResult.content)/2}"
+												th:data-board-seq="${board.seq}">
+												<td class="thumbnail">
+													<th:block th:if="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+															alt="placeholder"
+															onerror="this.onerror=null; this.src='images/visit7.jpg';"
+															class="error-image" />
+													</th:block>
+													<th:block
+														th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}">
+														<img th:src="@{/images/visit4.jpg}" alt="placeholder" width="100"
+															height="100" />
+													</th:block>
+												</td>
+												<td class="ellipsis">
+													<span>
+														<strong th:text="${board.title}"></strong>
+													</span>
+													<br>
+													<span th:text="${board.nickname}" class="boardWriter"></span>
+													<br>
+													<span th:text="${board.createDate}" class="boardDate"></span>														
+												</td>
+												
+												<td class="comment">
+													<i class="fas fa-comments"></i>
+													<span class="badge" th:text="${board.commentCount}"></span>
+													<br>
+													<i class="fas fa-eye"></i>
+													<span class="bcnt" th:text="${board.cnt}"></span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</section>
+							</th:block>
+						</div>
+
+
+						<footer class="major footer-pageIfo">
+							<!--Pagination-->
+							<div id="hidden_page_info" style="display: none;">
+								<p th:text="${sp}"> </p> <!--startPage-->
+								<p th:text="${ps}"></p> <!--pageSize-->
+								<p th:text="${ep}"></p> <!-- endPage-->
+								<p th:text="${tp}"></p> <!-- totalPageCount-->
+								<p th:text="${rp}"></p> <!-- rowSizePerPage-->
+								<p th:text="${st}"></p> <!-- searchType-->
+								<p th:text="${sw}"></p> <!-- searchWord-->
+								<p th:text="${cp}"></p> <!-- curPage-->
+
+							</div>
+
+							<div class="pagination-part">
+								<br />
+								<ul class="pagination justify-content-center">
+									<!-- First page link -->
+									<li class="page-item" th:class="${pagingInfo.curPage == 0 ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/main/community(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+											<i class="fas fa-angle-double-left"></i> 처음
+										</a>
+									</li>
+
+									<!-- Previous page link -->
+									<li class="page-item" th:class="${pagingInfo.curPage == 0} ? 'disabled' : ''">
+										<a class="page-link"
+											th:href="@{/main/community(curPage=${pagingInfo.curPage - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+											<i class="fas fa-caret-left"></i> 이전
+										</a>
+									</li>
+
+									<!-- Numbered pages -->
+									<th:block
+										th:each="page : ${#numbers.sequence(pagingInfo.startPage, pagingInfo.endPage)}">
+										<li class="page-item"
+											th:class="${page - 1 == pagingInfo.curPage} ? 'active' : ''">
+											<a class="page-link"
+												th:href="@{/main/community(curPage=${page - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}"
+												th:text="${page}"></a>
+										</li>
+									</th:block>
+
+									<!-- Next page link -->
+									<li class="page-item"
+										th:class="${tp == 0 || pagingInfo.curPage == pagingInfo.totalPageCount - 1} ? 'disabled' : ''">
+										<a class="page-link"
+											th:href="@{/main/community(curPage=${pagingInfo.curPage + 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+											다음 <i class="fas fa-caret-right"></i>
+										</a>
+									</li>
+
+									<!-- Last page link -->
+									<li class="page-item"
+										th:class="${tp == 0 || pagingInfo.curPage == pagingInfo.totalPageCount - 1} ? 'disabled' : ''">
+										<a class="page-link"
+											th:href="@{/main/community(curPage=${pagingInfo.totalPageCount - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+											마지막 <i class="fas fa-angle-double-right"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</footer>
+					</div>
+				</div><!--row -->
+			</section><!-- wrapper style2 container special-alt -->
+
+		</article>
+		<!--Article End-->
+		<br />
+
+		<!--CTA-->
+		<!--<section id="cta">
+			<header>
+				<h2>
+					<strong>Ready to Go?</strong>
+				</h2>
+
+				<p style="word-spacing: 5px;">소중한 추억, 여기요와 나눠요.</p>
+			</header>-->
+			<footer>
+				<ul class="buttons">
+					<li><a href="/main/community/write" class="btn"
+							style="border: 1px solid white; padding: 10px 50px;">글쓰기</a>
+					</li>
+
+				</ul>
+			</footer>
+		</section>
+		<!--Footer-->
+		<footer id="footer">
+
+			<ul class="copyright">
+				<li>@ Howsthere</li>
+				<li>
+					"How are you?"
+					<a href="#">This is our Homepage</a>
+				</li>
+			</ul>
+		</footer>
+	</div><!-- page-wrapper -->
+
+	<script>
+
+		//검색 초기화 
+		$('#btnReset').click(function () {
+			$('#curPage').val(0);
+			$('#boardForm').find("select[name='searchType'] option:eq(0)").attr("selected", "selected");
+			$('#boardForm').find("input[name='searchWord']").val("");
+			$('#boardForm').submit();
+		});
+
+		document.addEventListener('DOMContentLoaded', function () {
+
+			var hiddenDiv = document.getElementById('hidden_page_info');
+
+			var rowSizePerPage = hiddenDiv.querySelector('p:nth-child(5)').textContent.trim();
+			var rp = parseInt(rowSizePerPage);
+			var st = hiddenDiv.querySelector('p:nth-child(6)').textContent.trim();
+			var sw = hiddenDiv.querySelector('p:nth-child(7)').textContent.trim();
+			var cp = hiddenDiv.querySelector('p:nth-child(8)').textContent.trim();
+
+			console.log('rowSizePerPage:', rp);
+			console.log('searchType:', st);
+			console.log('searchWord:', sw);
+			console.log('curPage:', cp);
+
+			$('.features1').on('click', 'article.topPage', function () {
+				console.log("clicked on the article!..............................");
+				var boardSeq = $(this).data('board-seq');
+				var url = '/main/community/post-detail?seq=' + boardSeq;
+
+				window.location.href = url;
+			});
+
+			$(document).on('click', '.two-column-table tbody tr', function (e) {
+				e.preventDefault();
+
+				var boardSeq = $(this).data('board-seq');
+				var url = '/main/community/post-detail?seq=' + boardSeq;
+
+				console.log("Clicked on the board!", boardSeq);
+
+				window.location.href = url;
+			});
+
+			$('#boardForm').on('submit', function (e) {
+				e.preventDefault();
+				console.log("input to boardForm...........................");
+				var formData = $(this).serialize();
+				console.log("formData : ", formData);
+				var targetUrl = '/main/community?' + formData;
+
+				loadContent(targetUrl);
+				pushHistoryState(targetUrl);
+			});
+
+
+			function pushHistoryState(url) {
+				history.pushState({}, null, url);
+			}
+
+			function handlePopState(event) {
+				var url = location.pathname + location.search;
+				console.log("url : ", url);
+				loadContent(url);
+			}
+
+			window.addEventListener('popstate', handlePopState);
+
+			$(document).on('click', '.pagination li a', function (e) {
+				e.preventDefault();
+				var targetUrl = $(this).attr("href");
+				console.log("targetUrl : ", targetUrl);
+
+				loadContent(targetUrl);
+				pushHistoryState(targetUrl);
+			});
+
+
+			function loadContent(url) {
+				$.ajax({
+					url: url,
+					type: 'GET',
+					success: function (response) {
+						var newContent = $(response).find('.two-column-table').html();
+						var newPaging = $(response).find('.footer-pageIfo').html();
+						//console.log('newContent : ', newContent);
+						//console.log('newPaging : ', newPaging);
+
+						$('.two-column-table').html(newContent);
+
+						$('.footer-pageIfo').html(newPaging);
+						console.log('AJAX request successful');
+					},
+					error: function (xhr, status, error) {
+						console.error('AJAX request error:', error);
+					}
+				});
+			}
+
+
+		});
+
+		
+		
+		document.addEventListener('DOMContentLoaded', function () {
+			const menuBtn = document.getElementById('menu-btn');
+			const menu = document.getElementById('menu');
+
+			menuBtn.addEventListener('click', function () {
+				menu.classList.toggle('show');
+			});
+		});
+	</script>
+
+</body>
+
+</html>

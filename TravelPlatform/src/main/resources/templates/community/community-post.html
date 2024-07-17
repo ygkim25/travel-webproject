@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>게시글</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/community-post.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<div>
+	<header id="header" class="alt">
+		<th:block th:if="${user != null}">
+			<h5 id="logo">
+				<a th:href="@{/main/profile/user-info}">
+					<span th:text="${nickname}"> </span> 님
+				</a>
+			</h5>
+		</th:block>
+
+		<nav id="nav">
+			<ul>
+				<li class=""><a th:href="@{/main/community}">Home</a></li>
+				<li><a th:href="@{/main/community/gallery}">Gallery</a></li>
+				<th:block th:if="${nickname != null}">
+					<li th:if="${nickname != null}"><a th:href="@{/main/profile/user-info}">My Page</a>
+					</li>
+
+					<li th:if="${nickname != null}">
+						<a class="button" th:href="@{/main/logout}">Logout</a>
+
+					</li>
+
+				</th:block>
+			</ul>
+		</nav>
+	</header>
+
+	<!--login-->
+
+	<!--
+   <th:block th:if="${writer == null}">
+      <button class="btn-myButton btn btn-primary" onclick="location.href='/main/login';">로그인</button>
+   </th:block>
+   -->
+
+
+	<!-- Invisible Display board data -->
+	<!-- javascript용 히든 게시글 정보======================================================================================================= -->
+	<div class="prevBoard" style=" display: none;">
+		<h2> 나의 여행 일지 </h2>
+		<p>Board Writer: <span th:text="${board.nickname}"></span></p>
+		<p>Board Title: <span th:text="${board.title}"></span></p>
+		<p>Board Content: <span th:text="${board.content}"></span></p>
+		<p>Board ProcessedFileNames: <span th:text="${board.ProcessedFileNames}"></span></p>
+		<p>Board Seq: <span id="prev_boardSeq" th:text="${board.seq}"></span></p>
+	</div>
+
+
+	<div class="com-post" align="center">
+		<div class="row justify-content-center input-group mb-3">
+			<div class="com-post-secon">
+				<div class="com-totalcom">
+<!--					<button type="button" class="btn btn-primary" onclick="location.href='/main/community';">전체-->
+<!--						게시판</button>-->
+				</div>
+				<div class=" mt-4">
+					<div class="card bg-white text-dark">
+						<div class="com-post-title">
+						    <h3 class="card-title" th:text="${board.title}" style="font-weight: 400;"></h3>
+						    <img src="/images/com-postimg.jpg" width="150px" height="90px">
+						</div>
+
+						<div class="com-post-nick">
+							<span class="text-dark" th:text="${board.nickname}"></span>
+							<p class="card-text"><small class="text-dark"
+									th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></small></p>
+						</div>
+						<section class="com-post-c">
+							<th:block th:if="${board.ProcessedFileNames.size > 0}">
+								<div class="carousel-container">
+									<div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+										<!-- Indicators -->
+										<div class="carousel-indicators" style="display: none;">
+											<th:block th:each="filename, iterStat : ${board.ProcessedFileNames}">
+												<button type="button" data-bs-target="#myCarousel"
+													th:data-bs-slide-to="${iterStat.index}"
+													th:class="${iterStat.index == 0} ? 'active' : ''"
+													th:attr="aria-label=${'Slide ' + (iterStat.index + 1)}"></button>
+											</th:block>
+										</div>
+
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner">
+											<th:block th:each="filename, iterStat : ${board.ProcessedFileNames}">
+												<div
+													th:classappend="'carousel-item ' + ${iterStat.index == 0 ? ' active' : ''}">
+													<img th:src="@{'/upload/' + ${board.writer} + '/' + ${filename}}"
+														class="d-block w-100" alt="iterate image" />
+													<!--									   <img th:src="@{'file:' + ${#vars.uploadPath} + '/' + ${board.writer} + '/' + ${filename}}" class="d-block w-100" alt="iterate image"/>-->
+												</div>
+											</th:block>
+										</div>
+
+										<!-- Left and right controls -->
+										<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
+											data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#myCarousel"
+											data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Next</span>
+										</button>
+									</div>
+								</div>
+							</th:block>
+
+							<p class="card-text" th:text="${board.content}"></p>
+						</section>
+
+
+						<div class="com-update-btn">
+							<th:block th:if="${user != null}">
+								<div style="display: none;">
+									<!-- 좋아요 버튼용 히든 멤버 정보-->
+									<p id="session_memberId" th:text="${writer != null ? writer : uuid}"></p>
+									<!--test-->
+									<p>your UUID : <span th:text="${uuid}"></span></p>
+									<h1 th:if="${writer == null}" th:text="'your not logged in!!!'"></h1>
+								</div>
+								<th:block th:if="${writer == board.writer or user.role == 'ADMIN'}">
+									<button type="button" class="button"
+										th:onclick="|location.href='/main/community/post-update?seq=${board.seq}'|">수정</button>
+									<a href="javascript:void(0);" class="a-button"
+										th:onclick="'deletePost(\'' + ${board.seq} + '\')'">삭제</a>
+								</th:block>
+							</th:block>
+						</div>
+
+					</div>
+
+					<br>
+
+					<!--content 있는 경우-->
+					<th:block th:if="${not #lists.isEmpty(jsonContentList)}">
+						<div class="container json-container">
+							<h1 style="text-align: left; padding: 50px 0; font-weight: 600;">
+								여행 일지
+							</h1>
+							<small class="text-muted"> </small>
+
+							<!-- 여행일지 생성 -->
+							<div th:each="jsonString, iterStat : ${jsonContentList}">
+								<div id="jsoncontent" class="container json-entry">
+									<!-- Render each string within a separate div -->
+									<p id="count" class="day-counter"><strong th:text="${iterStat.count}"></strong>일차
+									</p>
+									<div class="content-wrapper">
+										<div class="content" th:text="${jsonString}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th:block>
+
+					<th:block th:if="${writer == board.writer}">
+						<!-- content 없는 경우-->
+						<th:block th:if="${#lists.isEmpty(jsonContentList)}">
+							<button class="button float-start"
+								th:onclick="|location.href='/main/community/traveldiary?seq=${board.seq}'|">여행일지
+								쓰기</button>
+						</th:block>
+						<!-- content 있는 경우-->
+						<th:block th:unless="${#lists.isEmpty(jsonContentList)}">
+							<button class="button float-start"
+								th:onclick="|location.href='/main/community/traveldiary?seq=${board.seq}'|">여행일지
+								수정</button>
+						</th:block>
+					</th:block>
+
+				</div>
+			</div>
+		</div>
+
+		<!--좋아요 / 찜하기 -->
+		<div class="container" style="text-align: center;">
+			<div class="row justify-content-center">
+				<div>
+					<p class="text-center">
+						<i class="fas fa-thumbs-up"></i>
+						<span id="likeCount" class="badgg">0</span>
+					</p>
+				</div>
+			</div>
+			<br />
+			<button type="button" id="likeButton" class="button">좋아요</button>
+			<button type="button" id="wishlistButton" class="button1">찜하기</button>
+		</div>
+
+		<br />
+		<br />
+
+		<div class="com-post-comment">
+
+			<hr />
+
+			<h3 style="display: flex; font-weight: 600;">댓글</h3>
+			<th:block th:if="${user != null}">
+				<div class="comment-secon" th:if="${writer != null}">
+					<form th:action="@{'/addboardComment/' + ${board.seq} + '/comments'}" method="post"
+						class="comment-form">
+						<input type="hidden" name="seq" class="form-control" id="" th:value="${board.seq}">
+						<input type="hidden" name="comWriter" id="comWriter" placeholder="이름"
+							class="comment-input form-control" th:value="${writer}" />
+						<input type="hidden" name="comWriterNick" id="comWriterNick" placeholder="닉네임"
+							class="comment-input form-control" th:value="${nickname}" />
+						<div class="form-group">
+							<!--<label for="comment" style="display: flex;">내용</label>-->
+							<textarea name="comment" id="comment" cols="100" rows="3" placeholder="정성스런 댓글을 작성해주세요.."
+								class="comment-text form-control" required></textarea>
+						</div>
+						<button type="submit" class="button float-start">댓글 쓰기</button>
+					</form>
+				</div>
+			</th:block>
+
+			<br />
+			<!--<hr />-->
+			<br />
+
+			<!-- 댓글, 답글 표시란-->
+			<div id="commentsContainer" class="comment-container col-md-12">
+				<div th:each="comment : ${commentList}" class="parent-comment card mb-3">
+					<!-- 1. 댓글 표시 -->
+					<div class="card-body">
+						<div class="com-comment">
+							<div class="com-comment1">
+								<h5 class="card-title" th:text="${comment.nickname}"></h5>
+								<p class="card-text"><small th:text="${comment.createDate}"></small></p>
+							</div>
+							<div class="com-comment1">
+								<p class="card-text" th:text="${comment.content}"></p>
+								<!-- 댓글 삭제, 답글기능 -->
+								<th:block th:if="${user != null}">
+									<!-- 2. 댓글 삭제-->
+									<th:block th:if="${user.role == 'ADMIN' or writer == comment.writer}">
+										<button type="button"
+											th:onclick="|location.href='/deleteComment/${board.seq}/${comment.id}'|"
+											class="btn btn-secondary btn-sm mb-3">삭제</button>
+									</th:block>
+								</th:block>
+							</div>
+							<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+							<!-- 2. 답글 표시-->
+							<div class="replies-container">
+								<div th:each="reply : ${comment.child}" class="reply card mb-2">
+									<div class="card-body">
+										<div class="com-comment1">
+										<h6 class="card-subtitle mb-2 text-muted" th:text="${reply.nickname}"></h6>
+										<span class="card-text"><small th:text="${reply.createDate}"></small></span>
+										</div>
+										<div class="com-comment1">
+										<p class="card-text" th:text="${reply.content}"></p>
+										<th:block th:if="${user != null}">
+											<!-- 2-2. 답글 삭제-->
+											<th:block th:if="${user.role == 'ADMIN' or writer == reply.writer}">
+												<button type="button"
+													th:onclick="|location.href='/deleteComment/${board.seq}/${reply.id}'|"
+													class="btn btn-secondary btn-sm float-end">삭제</button>
+											</th:block>
+										</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 3. 답글 쓰기-->
+							<th:block th:if="${user != null}">
+								<th:block th:if="${writer != null}">
+									<form class="reply-form">
+										<input type="hidden" name="repWriter" placeholder="이름"
+											class="form-control comment-input" th:value="${writer}" />
+										<input type="hidden" name="repWriterNick" placeholder="별명"
+											class="form-control comment-nick" th:value="${nickname}" />
+										<input type="hidden" name="boardSeq" placeholder="이름"
+											class="form-control board-seq" th:value="${board.seq}" />
+										<div class="form-group">
+											<textarea class="form-control reply-input" rows="3"
+												placeholder="답글 달기..."></textarea>
+										</div>
+										<button type="button" class="btn btn-dark btn-sm mt-2 reply-submit"
+											th:attr="data-comment-id=${comment.id}"> 답글 쓰기</button>
+									</form>
+								</th:block>
+							</th:block>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- javascript =======================================================================================================================================================================-->
+
+	<script th:inline="javascript">
+
+		function btnDownload(boardsSeq, filename) {
+			if (confirm("사진을 다운받으시겠습니까?") == true) {
+				var downloadUrl = '/download?seq=' + boardSeq + '&fn=' + filename;
+				console.log("downloadUrl : ", downloadUrl);
+				location.href = downloadUrl;
+			} else {
+				return;
+			}
+		}
+		//삭제
+		function deletePost(seq) {
+			if (confirm("게시글을 삭제하시겠습니까?")) {
+				location.href = '/deleteBoard?seq=' + seq;
+			} else {
+				return;
+			}
+		}
+
+		$(document).ready(function () {
+
+			$('.reply-submit').click(function (event) {
+				event.preventDefault();
+
+				var commentId = $(this).data('comment-id');
+				var replyContent = $(this).closest('.reply-form').find('.reply-input').val();
+				var repWriter = $(this).closest('.reply-form').find('.comment-input').val();
+				var repNick = $(this).closest('.reply-form').find('.comment-nick').val();
+				var boardSeq = $(this).closest('.reply-form').find('.board-seq').val();
+
+				//확인
+				console.log("commentId : ", commentId);
+				console.log("replyContent : ", replyContent);
+				console.log("repWriter : ", repWriter);
+				console.log("repNick : ", repNick);
+				console.log("boardSeq : ", boardSeq);
+				console.log("typeof repWriter", typeof repWriter);
+				console.log("typeof boardSeq", typeof boardSeq);
+
+				//공백 방지
+				if (replyContent.trim() === '') {
+					alert("답글을 먼저 작성해주세요!");
+					return;
+				}
+
+				$.ajax({
+					type: 'POST',
+					url: '/main/community/post-detail/reply',
+					contentType: 'application/json',
+					dataType: 'json',
+					data: JSON.stringify({
+						parentId: commentId,
+						content: replyContent,
+						repWriter: repWriter,
+						repNick: repNick,
+						boardSeq: boardSeq
+					}),
+					success: function (response) {
+						console.log('successfully replied!!', response);
+
+
+						const redirectBoardSeq = response.boardSeq;
+						const redirectUrl = response.redirectUrl;
+						console.log("response.boardSeq : ", redirectBoardSeq);
+						console.log("response.redirectUrl : ", redirectUrl);
+						console.log("typeof redirectBoardSeq : ", typeof redirectBoardSeq);
+						console.log("redirectBoardSeq : ", redirectBoardSeq);
+
+						const newRedirectUrl = redirectUrl + "?seq=" + redirectBoardSeq;
+						console.log("newRedirectUrl : ", newRedirectUrl);
+
+						window.location.href = newRedirectUrl;
+					},
+					error: function (xhr, status, error) {
+						console.log('Error posting reply', error);
+						window.location.href = '/main/community/post-detail?seq=' + boardSeqString;
+					}
+				});
+			});
+
+
+			const boardSeqString = document.getElementById('prev_boardSeq').textContent.trim();
+			console.log("boardSeqString : ", boardSeqString);
+			console.log("typeof boardSeqString : ", typeof boardSeqString);
+
+			const memberId = document.getElementById('session_memberId').textContent.trim();
+			console.log("session member Id : ", memberId);
+			console.log("typeof memberId : ", typeof memberId);
+
+			var likeButton = $("#likeButton");
+
+
+			$.get("/main/community/post-detail/" + boardSeqString + "/likeCount", function (data) {
+				if (data != null) {
+					$("#likeCount").text(data);
+					console.log("successfully received likeCount");
+				} else {
+					$("#likeCount").text('0');
+					console.error("Received null data for likeCount.");
+				}
+			});
+
+			function getNextMidnight() {
+				const now = new Date();
+				const tomorrow = new Date(now);
+				tomorrow.setDate(now.getDate() + 1);
+				tomorrow.setHours(0, 0, 0, 0);
+
+				return tomorrow.getTime();
+			}
+
+
+			likeButton.click(function () {
+
+				var localStorageKey = 'likeButtonDisabledUntil_' + boardSeqString + '_' + memberId;
+				console.log("localStorageKey : ", localStorageKey);
+
+				var disabledUntil = localStorage.getItem(localStorageKey);
+				console.log("disabledUntil : ", disabledUntil);
+				console.log("typeof disabledUntil : ", typeof disabledUntil);
+
+				if (disabledUntil && new Date() < new Date(parseInt(disabledUntil))) {
+					console.log("millisecond to date using 'new Date(parseInt(disabledUntil))' : ", new Date(parseInt(disabledUntil)));
+					alert("이미 좋아요를 눌렀습니다! 내일 다시 시도해주세요!");
+					console.log("버튼 활성까지 : ", disabledUntil);
+					return;
+				}
+
+				likeButton.prop("disabled", true);
+
+
+				const disableUntil = getNextMidnight();
+
+				localStorage.setItem(localStorageKey, disableUntil);
+				console.log("localStorage.setItem : ", localStorageKey, ",", disableUntil);
+				console.log("millisecond to date using 'new Date(parseInt(disableUntil))' : ", new Date(parseInt(disableUntil)));
+				//============================================================================
+
+				console.log("boardSeqString:", boardSeqString);
+				console.log("typeof boardSeqString:", typeof boardSeqString);
+				var url = "/main/community/post-detail/" + boardSeqString + "/like";
+				console.log("url:", url);
+
+
+				$.ajax({
+					url: url,
+					method: "POST",
+					success: function (data) {
+						$("#likeCount").text(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.error("AJAX error:", textStatus, errorThrown);
+
+						likeButton.prop("disabled", false);
+						localStorage.removeItem('likeButtonDisabledUntil');
+
+					}
+				});
+			});
+
+			var wishlistButton = $("#wishlistButton");
+			wishlistButton.click(function () {
+				var url = "/main/community/post-detail/" + boardSeqString + "/wishlist";
+				console.log("url : ", url);
+
+				$.post(url, function (data) {
+					if (data != null) {
+						alert("찜하기 등록되었습니다!!!");
+					} else {
+						console.log("nothing for wishlist!!");
+					}
+				})
+
+			})
+
+		});   
+	</script>
+
+
+
+	</body>
+
+</html>

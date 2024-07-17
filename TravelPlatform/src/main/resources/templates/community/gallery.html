@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<!-- jQuery and Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link href="/assets/css/gallery.css" rel="stylesheet" />
+
+	<title>갤러리</title>
+</head>
+
+<body>
+	<!--Nav bar-->
+	<header id="header" class="alt">
+		<h5 id="logo">
+			<a th:href="@{/main}"><img src="/images/logo.png" width="200" height="45" alt="Logo"></a>
+		</h5>
+
+		<nav id="nav">
+			<ul>
+				<li class=""><a th:href="@{/main}">Home</a></li>
+				<li><a th:href="@{/main/profile/user-info}">My page</a></li>
+				<li><a th:href="@{/main/community}">Community</a></li>
+				<li><a class="button" th:href="@{/main/logout}">Logout</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<!-- Main Content - Image Gallery -->
+	<div class="container">
+
+		<div style="display: none;">
+			<p th:text="${writer}"></p>
+			<p th:text="${fileNames}"></p>
+		</div>
+		<div class="container-header">
+			<img src="/images/photo.jpg" alt="" width="700" height="200" />
+		</div>
+		<div class="container-body">
+			<th:block th:if="${fileNames != null and fileNames.size == 0}">
+				<h3 class="user-not">게시글에 사진을 추가 해 갤러리를 꾸며주세요!</h3>
+			</th:block>
+			<th:block th:if="${fileNames != null}">
+				<!-- Thumbnail Grid -->
+				<div class="row">
+					<div class="thumbnail-container" th:each="filename : ${fileNames}">
+						<!--check if file is thumbnail-->
+						<th:block th:if="${filename.startsWith('s_')}">
+							<div class="thumbnail">
+								<!--<p th:text="${filename}"></p>-->
+								<img th:src="@{'/upload/' + ${writer} + '/' + ${filename}}" alt="thumbnail"
+									th:onclick="'showImage(\'' + @{'/upload/' + ${writer} + '/' + ${filename.replaceFirst('s_','')}} + '\')'" />
+							</div>
+						</th:block>
+					</div>
+				</div>
+			</th:block>
+		</div>
+		<!--Modal-->
+		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-center">
+						<img id="previewImage" src="" class="img-fluid" alt="Full-sized image">
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+
+		<!-- JavaScript -->
+		<script>
+			function showImage(imageSrc) {
+				$('#previewImage').attr('src', imageSrc);
+				$('#imageModal').modal('show');
+			}
+		</script>
+
+
+</body>
+
+</html>

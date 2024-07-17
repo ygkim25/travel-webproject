@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "path.upload",
+    "type": "java.lang.String",
+    "description": "A description for 'path.upload'"
+  },
+  {
+    "name": "path.download",
+    "type": "java.lang.String",
+    "description": "A description for 'path.download'"
+  },
+  {
+    "name": "path.profiles.include",
+    "type": "java.lang.String",
+    "description": "A description for 'path.profiles.include'"
+  }
+]}

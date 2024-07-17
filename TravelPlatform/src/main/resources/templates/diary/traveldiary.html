@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나만의 여행일지</title>
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ip45oqmru1&submodules=geocoder"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAodWCZg15MQScyVFRqRynHsuNl6eRrmFY&callback=initMap" async defer></script>-->
+	<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=39ac2945c188ba2a509cec5d3ed60fd9"></script>-->
+	<link href="/assets/css/traveldiary.css" rel="stylesheet">
+	<link href="/assets/css/diaryDetail.css" rel="stylesheet">
+	
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <a th:href="@{/main}" class="logo"><img src="/images/logo.png" class="mainLogo" alt="Logo"><br /></a>
+            <h1>나만의 여행일지</h1><a th:href="@{/main/profile/user-info}" th:text="${nickname} + ' 님'" class="userlogo"></a>
+        </div>
+    </header>
+	<main>
+	    <section id="content">
+	        <div id="content-left">
+				<div id="journal-entries">
+		            <h2>나만의 여행일지 목록<img src="/images/marker1.png"></h2>
+		            <div class="entry-options">
+		                <button id="write-button" onclick="location.href='/main/traveldiary/diarywrite'">글쓰기</button>
+		            </div>
+		            <table class="diaryFrame">
+						<tr>	
+							<td th:each="diary: ${pageDiaryList}" th:attr="data-listNumber=${diary.listNumber}, data-title=${diary.diaryTitle}, data-content=${diary.diaryContent}, data-date=${#temporals.format(diary.diaryDate, 'yyyy-MM-dd')}, data-location=${diary.diaryLocation}, data-images=${diary.diaryImages}", onclick="openPopup(this); return false;">
+					            <div class="diaryThumbnail">
+					                <div class="thumbnailImage">
+										<img th:src="${#arrays.isEmpty(diary.diaryImages) ? '/static/uploadsImages/default-thumbnail.png' : diary.diaryImages.split(',')[0]}" style="max-width: 230px; max-height: 150px;">
+					                </div>
+					                <div class="thumbnailContentBox">
+										<div class="thumbnailTitle" th:if="${#strings.length(diary.diaryTitle) >= 8}" th:text="'제목 : ' + ${#strings.substring(diary.diaryTitle, 0, 8) + '...'}"></div>
+										<div class="thumbnailTitle" th:unless="${#strings.length(diary.diaryTitle) >= 8}" th:text="'제목 : ' + ${diary.diaryTitle}"></div>
+										
+										<div class="thumbnailLocation" th:if="${#strings.length(diary.diaryLocation) >= 8}" th:text="'위치 : ' + ${#strings.substring(diary.diaryLocation, 0, 8) + '...'}"></div>
+										<div class="thumbnailLocation" th:unless="${#strings.length(diary.diaryLocation) >= 8}" th:text="'위치 : ' + ${diary.diaryLocation}"></div>
+										
+					                    <div class="thumbnailDate" th:text="'날짜 : ' + ${#temporals.format(diary.diaryDate, 'yyyy-MM-dd')}"></div>
+										
+										<div class="thumbnailContent" th:if="${#strings.length(diary.diaryContent) >= 8}" th:text="'내용 : ' + ${#strings.substring(diary.diaryContent, 0, 8) + '...'}"></div>
+										<div class="thumbnailContent" th:unless="${#strings.length(diary.diaryContent) >= 8}" th:text="'내용 : ' + ${diary.diaryContent}"></div>
+					                </div>
+					            </div>
+						    </td>
+						</tr>
+		            </table>
+		
+					<div id="pagingFrame">
+					    <ul class="pagination modal">
+					        <!-- 첫 번째 페이지로 이동 -->
+					        <li><a th:href="@{/main/traveldiary(page=1)}" class="first">First</a></li>
+					        
+					        <!-- 이전 링크 활성화 비활성화 -->
+					        <li>
+					            <a th:href="${pageDiaryList.first} ? '#' : @{/main/traveldiary(page=${pageDiaryList.number})}" class="left"><<</a>
+					        </li>
+					        
+					        <!-- 페이지 번호 링크 (현재 페이지는 숫자만) -->
+					        <li th:each="page : ${#numbers.sequence(startPage, endPage)}">
+					            <span th:if="${page == pageDiaryList.number + 1}" th:text="${page}" class="num active"></span>
+					            <span th:unless="${page == pageDiaryList.number + 1}">
+					                <a th:href="@{/main/traveldiary(page=${page})}" th:text="${page}" class="num"></a>
+					            </span>
+					        </li>
+					        
+					        <!-- 다음 링크 활성화 비활성화 -->
+					        <li>
+					            <a th:href="${pageDiaryList.last} ? '#' : @{/main/traveldiary(page=${pageDiaryList.number + 2})}" class="right">>></a>
+					        </li>
+					        
+					        <!-- 마지막 페이지로 이동 -->
+					        <li><a th:href="@{/main/traveldiary(page=${pageDiaryList.totalPages})}" class="last">Last</a></li>
+					    </ul>
+					</div>
+
+				</div>
+				
+				<div id="journal-entries-scon">
+		            <h2>나만의 위시 리스트<img src="/images/marker2.png"></h2>
+					<div class="entry-options">
+		                <button id="write-button" onclick="location.href='/main/traveldiary/wishDiaryWrite'">글쓰기</button>
+		            </div>
+		            <table class="diaryFrame">
+						<tr>
+		                    <th>번호</th>
+		                    <th>제목</th>
+		                    <th>내용</th>
+		                    <th>위치</th>
+		                    <th>날짜</th>
+		                </tr>
+						<tr th:each="diary: ${pageWishDiaryList}" th:attr="wish-data-listNumber=${diary.listNumber}, wish-data-title=${diary.diaryTitle}, wish-data-content=${diary.diaryContent}, wish-data-date=${#temporals.format(diary.diaryDate, 'yyyy-MM-dd')}, wish-data-location=${diary.diaryLocation}" onclick="wishOpenPopup(this); return false;">  
+		                    <td th:text="${diary.listNumber}"></td>
+		                    <td>
+								<span th:if="${#strings.length(diary.diaryTitle) >= 8}" th:text="${#strings.substring(diary.diaryTitle, 0, 8) + '...'}"></span>
+		                        <span th:unless="${#strings.length(diary.diaryTitle) >= 8}" th:text="${diary.diaryTitle}"></span>                    
+		                    </td>
+		                    <td>
+		                        <span th:if="${#strings.length(diary.diaryContent) >= 8}" th:text="${#strings.substring(diary.diaryContent, 0, 8) + '...'}"></span>
+		                        <span th:unless="${#strings.length(diary.diaryContent) >= 8}" th:text="${diary.diaryContent}"></span>                    
+		                    </td>
+							<td>
+		                        <span th:if="${#strings.length(diary.diaryLocation) >= 8}" th:text="${#strings.substring(diary.diaryLocation, 0, 8) + '...'}"></span>
+		                        <span th:unless="${#strings.length(diary.diaryLocation) >= 8}" th:text="${diary.diaryLocation}"></span>                    
+		                    </td>
+		                    <td th:text="${#temporals.format(diary.diaryDate, 'yyyy-MM-dd')}"></td>
+		                </tr>
+		            </table>
+
+					<div id="pagingFrame">
+					    <ul class="pagination modal">
+					        <!-- 첫 번째 페이지로 이동 -->
+					        <li><a th:href="@{/main/traveldiary(wishpage=1)}" class="first">First</a></li>
+					        
+					        <!-- 이전 링크 활성화 비활성화 -->
+					        <li>
+					            <a th:href="${pageWishDiaryList.first} ? '#' : @{/main/traveldiary(wishpage=${pageWishDiaryList.number})}" class="left"><<</a>
+					        </li>
+					        
+					        <!-- 페이지 번호 링크 (현재 페이지는 숫자만) -->
+					        <li th:each="wishpage : ${#numbers.sequence(wishStartPage, wishEndPage)}">
+					            <span th:if="${wishpage == pageWishDiaryList.number + 1}" th:text="${wishpage}" class="num active"></span>
+					            <span th:unless="${wishpage == pageWishDiaryList.number + 1}">
+					                <a th:href="@{/main/traveldiary(wishpage=${wishpage})}" th:text="${wishpage}" class="num"></a>
+					            </span>
+					        </li>
+					        
+					        <!-- 다음 링크 활성화 비활성화 -->
+					        <li>
+					            <a th:href="${pageWishDiaryList.last} ? '#' : @{/main/traveldiary(wishpage=${pageWishDiaryList.number + 2})}" class="right">>></a>
+					        </li>
+					        
+					        <!-- 마지막 페이지로 이동 -->
+					        <li><a th:href="@{/main/traveldiary(wishpage=${pageWishDiaryList.totalPages})}" class="last">Last</a></li>
+					    </ul>
+					</div>
+				</div>
+	        </div>
+			
+	        <div id="map"></div>
+
+			<div class="popup" id="diaryPopup">
+			    <div class="popup-detail">
+			        <span class="close-button" onclick="closePopup()">&times;</span>
+					<h2 id="popup-title"></h2>
+					<section>
+				        <div class="carousel-container">
+				            <button class="carousel-button prev" onclick="moveCarousel(-1)">&#10094;</button>
+				            <div id="popup-images" class="carousel-images"></div>
+				            <button class="carousel-button next" onclick="moveCarousel(1)">&#10095;</button>
+				        </div>
+				        <div class="popup-section-header">
+							<div class="popup-section">
+					            <p id="popup-content"></p>
+					        </div>
+				        </div>
+					</section>
+			        <hr>
+					<div class="popup-section-seconde-header">
+		                <div class="date-container">
+							<p id="popup-listNumber" style="display: none;"></p>
+							<img src="/images/diarylogo.png" style="width: 20px;">
+							<p id="popup-date"></p>
+						</div>
+		                <div class="location-container">
+		                    <img src="/images/marker1.png" alt="Location Marker">
+		                    <p id="popup-location"></p>
+		                </div>
+		            </div>
+			        <div class="popup-buttons">
+			            <button onclick="updateReq()">글 수정</button>
+			            <button onclick="deleteReq()">글 삭제</button>
+			        </div>
+			    </div>
+			</div>
+
+			
+			
+			<div class="wish-popup" id="wishDiaryPopup">
+			    <div class="wish-popup-content">
+			        <span class="wish-close-button" onclick="wishClosePopup()">&times;</span>
+			        <div class="wish-popup-section-header">
+			            <h2 id="wish-popup-title"></h2>
+			            <div class="wish-popup-section-seconde-header">
+			                <p id="wish-popup-listNumber" style="display: none;"></p>
+			                <div class="wish-date-container">
+								<img src="/images/diarylogo.png" style="width: 20px;">
+								<p id="wish-popup-date"></p>
+							</div>
+			                <div class="wish-location-container">
+			                    <img src="/images/marker1.png" alt="Location Marker">
+			                    <p id="wish-popup-location"></p>
+			                </div>
+			            </div>
+			        </div>
+			        <hr>
+			        <div class="wish-popup-section">
+						<p id="wish-popup-content"></p>
+			        </div>
+			        <div class="wish-popup-buttons">
+			            <button onclick="wishUpdateReq()">글 수정</button>
+			            <button onclick="wishDeleteReq()">글 삭제</button>
+			        </div>
+			    </div>
+			</div>
+	    </section>
+	</main>
+	
+	<script th:inline="javascript">
+	    naver.maps.onJSContentLoaded = function() {
+	        var center = new naver.maps.LatLng(35.8, 127.9);
+
+	        var map = new naver.maps.Map('map', {
+	            center: center,
+	            zoom: 8
+	        });
+
+	        var diaryList = /*[[${allDiaryList}]]*/ [];
+
+	        diaryList.forEach(function(diary) {
+	            var address = diary.diaryLocation;
+
+	            // 주소 변환 서비스 호출
+	            naver.maps.Service.fromAddrToCoord({ address: address }, function(status, response) {
+	                // 상태와 응답을 콘솔에 출력하여 확인
+	                console.log('Status:', status);
+	                console.log('Response:', response);
+
+	                // 응답 객체를 상세히 출력하여 구조 확인
+	                console.log('Response Object:', JSON.stringify(response, null, 2));
+
+	                // 상태가 에러이거나, 응답이 올바르지 않은 경우 처리
+	                if (status === naver.maps.Service.Status.ERROR || !response.result || !response.result.items || response.result.items.length === 0) {
+	                    return alert('잘못된 여행지 위치 입니다.\n다시 수정해주세요!');
+	                }
+
+	                var marker = new naver.maps.Marker({
+	                    position: new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+	                    map: map,
+	                    icon: {
+	                        url: '/images/marker1.png',
+	                        size: new naver.maps.Size(50, 50),
+	                        origin: new naver.maps.Point(0, 0),
+	                        anchor: new naver.maps.Point(25, 25)
+	                    }
+	                });
+	            });
+	        });
+
+	        var wishDiaryList = /*[[${allWishDiaryList}]]*/ [];
+
+	        wishDiaryList.forEach(function(diary) {
+	            var address = diary.diaryLocation;
+
+	            // 주소 변환 서비스 호출
+	            naver.maps.Service.fromAddrToCoord({ address: address }, function(status, response) {
+	                // 상태와 응답을 콘솔에 출력하여 확인
+	                console.log('Status:', status);
+	                console.log('Response:', response);
+
+	                // 응답 객체를 상세히 출력하여 구조 확인
+	                console.log('Response Object:', JSON.stringify(response, null, 2));
+
+	                // 상태가 에러이거나, 응답이 올바르지 않은 경우 처리
+	                if (status === naver.maps.Service.Status.ERROR || !response.result || !response.result.items || response.result.items.length === 0) {
+	                    return alert('Something wrong!');
+	                }
+
+	                var marker = new naver.maps.Marker({
+	                    position: new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+	                    map: map,
+	                    icon: {
+	                        url: '/images/marker2.png',
+	                        size: new naver.maps.Size(50, 50),
+	                        origin: new naver.maps.Point(0, 0),
+	                        anchor: new naver.maps.Point(25, 25)
+	                    }
+	                });
+	            });
+	        });
+	    };
+	
+			
+		var currentIndex = 0;
+
+		function openPopup(element) {
+		    var listNumber = element.getAttribute("data-listNumber");
+		    var title = element.getAttribute("data-title");
+		    var content = element.getAttribute("data-content");
+		    var date = element.getAttribute("data-date");
+		    var location = element.getAttribute("data-location");
+		    var images = element.getAttribute("data-images");
+
+		    var imagesContainer = document.getElementById("popup-images");
+		    imagesContainer.innerHTML = ''; // 기존 내용을 초기화
+		    currentIndex = 0;
+
+		    if (images) {
+		        var imagePaths = images.split(','); // 여러 이미지 경로를 쉼표로 구분하여 배열로 만듦
+		        imagePaths.forEach(function(path) {
+		            var img = document.createElement("img");
+		            img.src = path.trim(); // 경로 앞뒤의 공백 제거
+		            imagesContainer.appendChild(img);
+		        });
+		    } else {
+		        var img = document.createElement("img");
+		        img.src = "/static/uploadsImages/default-thumbnail.png"; // 기본 이미지 경로
+		        imagesContainer.appendChild(img);
+		    }
+
+		    updateCarousel();
+
+		    // content의 줄 바꿈을 br 태그로 변환하여 설정
+		    var contentElement = document.getElementById("popup-content");
+		    contentElement.innerHTML = content.replace(/\n/g, '<br>');
+
+		    document.getElementById("popup-listNumber").textContent = listNumber;
+		    document.getElementById("popup-title").textContent = title;
+		    document.getElementById("popup-date").textContent = date;
+		    document.getElementById("popup-location").textContent = location;
+
+		    document.getElementById("diaryPopup").style.display = "block";
+		}
+
+
+		function moveCarousel(step) {
+		    var imagesContainer = document.getElementById("popup-images");
+		    var images = imagesContainer.getElementsByTagName("img");
+		    currentIndex = (currentIndex + step + images.length) % images.length;
+		    updateCarousel();
+		}
+
+		function updateCarousel() {
+		    var imagesContainer = document.getElementById("popup-images");
+		    var images = imagesContainer.getElementsByTagName("img");
+		    var offset = -currentIndex * 100;
+		    imagesContainer.style.transform = "translateX(" + offset + "%)";
+		}
+
+		
+		function wishOpenPopup(element) {
+		    var listNumber = element.getAttribute("wish-data-listNumber");
+		    var title = element.getAttribute("wish-data-title");
+		    var content = element.getAttribute("wish-data-content");
+		    var date = element.getAttribute("wish-data-date");
+		    var location = element.getAttribute("wish-data-location");
+
+		    document.getElementById("wish-popup-listNumber").textContent = listNumber;
+		    document.getElementById("wish-popup-title").textContent = title;
+
+		    // 줄 바꿈을 br 태그로 변환하여 content에 설정
+		    var contentElement = document.getElementById("wish-popup-content");
+		    contentElement.innerHTML = content.replace(/\n/g, '<br>');
+
+		    document.getElementById("wish-popup-date").textContent = date;
+		    document.getElementById("wish-popup-location").textContent = location;
+
+		    document.getElementById("wishDiaryPopup").style.display = "block";
+		}
+
+
+	    function closePopup() {
+
+	        document.getElementById("diaryPopup").style.display = "none";
+	    }
+		
+		function wishClosePopup() {
+
+	        document.getElementById("wishDiaryPopup").style.display = "none";
+	    }
+		
+		
+		const updateReq = () => {
+			const listNumber = document.getElementById('popup-listNumber').textContent;
+			location.href = "/traveldiary/diaryUpdate/" + listNumber;
+		}
+
+		
+		const wishUpdateReq = () => {
+			const listNumber = document.getElementById('wish-popup-listNumber').textContent;
+			location.href = "/traveldiary/wishDiaryUpdate/" + listNumber;
+		}
+		
+		
+		const deleteReq = () => {
+			//const listNumber = document.getElementById('popup-listNumber').textContent;
+			//location.href = "/diaryDelete/" + listNumber;
+			
+			var confirmationMessage = '이 작업은 되돌릴 수 없습니다.\n자신의 게시물을 삭제하시겠습니까?';
+
+	        if (confirm(confirmationMessage)) {
+	            // '예'를 선택한 경우
+				const listNumber = document.getElementById('popup-listNumber').textContent;
+	            location.href = "/traveldiary/diaryDelete/" + listNumber;
+	        } else {
+	            // '아니요' 또는 '취소'를 선택한 경우
+	            // 아무 동작도 수행하지 않습니다.
+	        }
+		}
+		
+	
+		const wishDeleteReq = () => {
+			//const listNumber = document.getElementById('popup-listNumber').textContent;
+			//location.href = "/diaryDelete/" + listNumber;
+			
+			var confirmationMessage = '이 작업은 되돌릴 수 없습니다.\n자신의 게시물을 삭제하시겠습니까?';
+
+	        if (confirm(confirmationMessage)) {
+	            // '예'를 선택한 경우
+				const listNumber = document.getElementById('wish-popup-listNumber').textContent;
+	            location.href = "/traveldiary/wishDiaryDelete/" + listNumber;
+	        } else {
+	            // '아니요' 또는 '취소'를 선택한 경우
+	            // 아무 동작도 수행하지 않습니다.
+	        }
+		}
+		
+	</script>
+	
+</body>
+</html>

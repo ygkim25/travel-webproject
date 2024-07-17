@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>회원가입</title>
+	<link href="/assets/css/register.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="register-container">
+		<img src="/images/logo.png" alt="" width="250" height="50" />
+		<div class="register-header">
+			<span class="separator"></span>
+			<h5>회원가입</h5>
+			<span class="separator"></span>
+		</div>
+		<form th:action="@{/main/register}" method="post" th:object="${user}">
+			<input type="text" id="username" th:field="*{username}" placeholder="이름" class="form-control"><br>
+			<input type="text" id="userbirth" th:field="*{userBirth}" placeholder="주민번호 앞 6자리" class="form-control"><br>
+			<div th:if="${birthLengthError}" th:text="${birthLengthError}" class="password-error"></div>
+			<input type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임" class="form-control"><br>
+			<div th:if="${nicknameLengthError}" th:text="${nicknameLengthError}" class="password-error"></div>
+			<div th:if="${nicknameEqualError}" th:text="${nicknameEqualError}" class="password-error"></div>
+			<input type="email" id="email" th:field="*{email}" placeholder="이메일" class="form-control"><br />
+			<div th:if="${emailEqualError}" th:text="${emailEqualError}" class="password-error"></div>
+			<div id="emailSendSuccess" style="display:none;" class="password-error">인증 이메일이 전송되었습니다. 인증번호를 입력하세요.
+			</div>
+			<div>
+				<button type="button" class="authentication-btn" id="sendEmailButton" onclick="sendEmail()">이메일
+					인증</button>
+			</div>
+			<div id="verificationContainer" style="display:none;">
+				<input type="text" id="verificationCode" name="verificationCode" placeholder="인증번호"
+					class="form-control" /><br />
+				<button type="button" class="success-btn" id="verifyCodeButton" onclick="verifyCode()">인증번호
+					확인</button>
+			</div>
+			<div id="verificationSuccess" style="display:none;" class="password-success">인증이 완료되었습니다.</div>
+			<div id="verificationFailure" style="display:none;" class="password-error">인증번호가 일치하지 않습니다.</div>
+			<div id="emailVerificationError" th:if="${emailVerificationError}" th:text="${emailVerificationError}"
+				class="password-error"></div>
+			<input type="password" id="password" th:field="*{password}" placeholder="비밀번호" class="form-control"><br>
+			<div th:if="${passwordLengthError}" th:text="${passwordLengthError}" class="password-error"></div>
+			<input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="비밀번호 확인"
+				class="form-control"><br>
+			<div th:if="${passwordEqualError}" th:text="${passwordEqualError}" class="password-error"></div>
+			<div th:if="${passwordPatternError}" th:text="${passwordPatternError}" class="password-error"></div>
+			<button type="submit" class="register-btn">회원가입</button>
+		</form>
+
+
+
+</body>
+<script>
+	function sendEmail() {
+		var email = document.getElementById("email").value;
+
+		fetch('/main/register/mailSend', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: new URLSearchParams({
+				'mail': email
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.success) {
+					document.getElementById("emailSendSuccess").style.display = 'block';
+					document.getElementById("verificationContainer").style.display = 'block'; // 인증번호 입력 박스와 버튼 표시
+					document.getElementById("emailVerificationError").style.display = 'none'; // 이메일 인증 오류 메시지 숨김
+				} else {
+					alert('이메일 전송에 실패했습니다: ' + data.error);
+				}
+			});
+	}
+
+	function verifyCode() {
+		var userNumber = document.getElementById("verificationCode").value;
+
+		fetch('/main/register/mailCheck?userNumber=' + userNumber, {
+			method: 'GET'
+		})
+			.then(response => response.json())
+			.then(isMatch => {
+				if (isMatch) {
+					document.getElementById("verificationSuccess").style.display = 'block';
+					document.getElementById("verificationFailure").style.display = 'none';
+					// 이메일 인증 성공 시 세션에 인증 상태 저장
+					fetch('/main/register/verifySuccess', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						body: new URLSearchParams({
+							'emailVerified': true
+						})
+					});
+				} else {
+					document.getElementById("verificationFailure").style.display = 'block';
+					document.getElementById("verificationSuccess").style.display = 'none';
+				}
+			});
+	}
+</script>
+
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>저기어때? 커뮤니티</title>
+	<meta name="viewport" content="width-device-width, initial-scale=1, user-scalable=no" />
+	<!--link -->
+	<link rel="stylesheet" href="/assets/css/mainSearch.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- noscript-->
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<!--jquery-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body class="index is-preload">
+	<div id="page-wrapper">
+		<header>
+			<div class="banner">
+				<img src="/images/logo.png" alt="Logo" class="mainLogo" onclick="location.href='/main'"><br />
+				<div class="login-box" th:if="${isLoggedIn}">
+					<a th:href="@{/main/profile/user-info}" th:text="${nickname != null ? nickname + ' 님' : '닉네임을 설정해주세요.'}"
+						class="welcome-message m-0" id="welcomeMessage"></a>
+				</div>
+				<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+					<button id="logout-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+				</form>
+				<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+					<button id="login-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그인</button>
+				</form>
+
+				<a href="#" class="menu-btn" id="menu-btn">
+					<span>Menu</span>
+					<div></div>
+				</a>
+				<div class="menu" id="menu">
+					<ul>
+						<li>
+							<input type="search" placeholder="검색" aria-label="Search">
+							<button class="btn btn-outline-light btn-lg" id="m-search-button" type="submit">검색</button>
+						</li>
+						<li>
+							<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+								<button id="m-logout-button" type="submit"
+									class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+							</form>
+							<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+								<button id="m-login-button" type="submit"
+									class="btn btn-outline-light btn-lg ms-2">로그인</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		
+		<div style="display: flex; align-items: center;">
+			<h2 th:text="${pagingInfo.getSearchWord}" style="font-weight: 600;"></h2>
+			<h2>에 대한 검색 결과는 다음과 같습니다.</h2>			
+		</div>
+					<!--==============================================================================================-->
+					<!--Three-->
+
+					<!--==============================================================================================-->
+		<div class="col-table">
+			<div class="two-column-table">
+				<span th:text="| 총 ${pagedResult.getTotalElements()}건의 검색결과 : |"
+					style="margin: 0; font-size: 1em;"></span>
+				<span></span>
+				<th:block th:if="${pagedResult != null}">
+					<section>
+						<ul class="list-unstyled">
+							<li th:each="board, iterStat : ${pagedResult.getContent()}" th:data-board-id="${board.seq}"
+								class="board-li">
+								<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="go-post">
+									<div class="d-flex align-items-center">
+										<div class="img">
+											<img th:if="${not #lists.isEmpty(board.ProcessedFileNames)}"
+												th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+												alt="게시글 이미지" class="img-thumbnail" />
+											<img th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}"
+												src="/images/visit4.jpg" alt="기본 이미지" class="img-thumbnail" />
+										</div>
+										<div class="content-container">
+											<div class="board-title">
+												<h6 th:text="${board.title}"></h6>
+												<div class="board-writer" th:text="${board.writer}"></div>
+												<div class="board-createdate"
+													th:text="${#dates.format(board.CreateDate, 'yyyy MM dd')}">
+												</div>
+											</div>
+											<div class="board-stats">
+												<div class="board-count">
+													<i class="fas fa-comments"></i>
+													<small class="badge" th:text="${board.commentCount}"></small>
+												</div>
+												<div class="board-cnt">
+													<i class="fas fa-eye"></i>
+													<small class="badge" th:text="${board.cnt}"></small>
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</section>
+				</th:block>
+			</div>
+
+			<footer class="major footer-pageIfo">
+				<!--Pagination-->
+				<div id="hidden_page_info" style="display: none;">
+					<p th:text="${sp}"> </p> <!--startPage-->
+					<p th:text="${ps}"></p> <!--pageSize-->
+					<p th:text="${ep}"></p> <!-- endPage-->
+					<p th:text="${tp}"></p> <!-- totalPageCount-->
+					<p th:text="${rp}"></p> <!-- rowSizePerPage-->
+					<p th:text="${st}"></p> <!-- searchType-->
+					<p th:text="${sw}"></p> <!-- searchWord-->
+					<p th:text="${cp}"></p> <!-- curPage-->
+
+				</div>
+
+				<div class="pagination-part">
+					<br />
+					<ul class="pagination justify-content-center">
+						<!-- First page link -->
+						<li class="page-item" th:class="${pagingInfo.curPage == 0 ? 'disabled' : ''}">
+							<a class="page-link"
+								th:href="@{/main/community(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+								<i class="fas fa-angle-double-left"></i> 처음
+							</a>
+						</li>
+
+						<!-- Previous page link -->
+						<li class="page-item" th:class="${pagingInfo.curPage == 0} ? 'disabled' : ''">
+							<a class="page-link"
+								th:href="@{/main/community(curPage=${pagingInfo.curPage - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+								<i class="fas fa-caret-left"></i> 이전
+							</a>
+						</li>
+
+						<!-- Numbered pages -->
+						<th:block
+							th:each="page : ${#numbers.sequence(pagingInfo.startPage, pagingInfo.endPage)}">
+							<li class="page-item"
+								th:class="${page - 1 == pagingInfo.curPage} ? 'active' : ''">
+								<a class="page-link"
+									th:href="@{/main/community(curPage=${page - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}"
+									th:text="${page}"></a>
+							</li>
+						</th:block>
+
+						<!-- Next page link -->
+						<li class="page-item"
+							th:class="${tp == 0 || pagingInfo.curPage == pagingInfo.totalPageCount - 1} ? 'disabled' : ''">
+							<a class="page-link"
+								th:href="@{/main/community(curPage=${pagingInfo.curPage + 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+								다음 <i class="fas fa-caret-right"></i>
+							</a>
+						</li>
+
+						<!-- Last page link -->
+						<li class="page-item"
+							th:class="${tp == 0 || pagingInfo.curPage == pagingInfo.totalPageCount - 1} ? 'disabled' : ''">
+							<a class="page-link"
+								th:href="@{/main/community(curPage=${pagingInfo.totalPageCount - 1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}">
+								마지막 <i class="fas fa-angle-double-right"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+
+		//검색 초기화 
+		$('#btnReset').click(function () {
+			$('#curPage').val(0);
+			$('#boardForm').find("select[name='searchType'] option:eq(0)").attr("selected", "selected");
+			$('#boardForm').find("input[name='searchWord']").val("");
+			$('#boardForm').submit();
+		});
+
+		document.addEventListener('DOMContentLoaded', function () {
+
+			var hiddenDiv = document.getElementById('hidden_page_info');
+
+			var rowSizePerPage = hiddenDiv.querySelector('p:nth-child(5)').textContent.trim();
+			var rp = parseInt(rowSizePerPage);
+			var st = hiddenDiv.querySelector('p:nth-child(6)').textContent.trim();
+			var sw = hiddenDiv.querySelector('p:nth-child(7)').textContent.trim();
+			var cp = hiddenDiv.querySelector('p:nth-child(8)').textContent.trim();
+
+			console.log('rowSizePerPage:', rp);
+			console.log('searchType:', st);
+			console.log('searchWord:', sw);
+			console.log('curPage:', cp);
+
+			$('.features1').on('click', 'article.topPage', function () {
+				console.log("clicked on the article!..............................");
+				var boardSeq = $(this).data('board-seq');
+				var url = '/main/community/post-detail?seq=' + boardSeq;
+
+				window.location.href = url;
+			});
+
+			$(document).on('click', '.two-column-table tbody tr', function (e) {
+				e.preventDefault();
+
+				var boardSeq = $(this).data('board-seq');
+				var url = '/main/community/post-detail?seq=' + boardSeq;
+
+				console.log("Clicked on the board!", boardSeq);
+
+				window.location.href = url;
+			});
+
+			$('#boardForm').on('submit', function (e) {
+				e.preventDefault();
+				console.log("input to boardForm...........................");
+				var formData = $(this).serialize();
+				console.log("formData : ", formData);
+				var targetUrl = '/main/community?' + formData;
+
+				loadContent(targetUrl);
+				pushHistoryState(targetUrl);
+			});
+
+
+			function pushHistoryState(url) {
+				history.pushState({}, null, url);
+			}
+
+			function handlePopState(event) {
+				var url = location.pathname + location.search;
+				console.log("url : ", url);
+				loadContent(url);
+			}
+
+			window.addEventListener('popstate', handlePopState);
+
+			$(document).on('click', '.pagination li a', function (e) {
+				e.preventDefault();
+				var targetUrl = $(this).attr("href");
+				console.log("targetUrl : ", targetUrl);
+
+				loadContent(targetUrl);
+				pushHistoryState(targetUrl);
+			});
+
+
+			function loadContent(url) {
+				$.ajax({
+					url: url,
+					type: 'GET',
+					success: function (response) {
+						var newContent = $(response).find('.two-column-table').html();
+						var newPaging = $(response).find('.footer-pageIfo').html();
+						//console.log('newContent : ', newContent);
+						//console.log('newPaging : ', newPaging);
+
+						$('.two-column-table').html(newContent);
+
+						$('.footer-pageIfo').html(newPaging);
+						console.log('AJAX request successful');
+					},
+					error: function (xhr, status, error) {
+						console.error('AJAX request error:', error);
+					}
+				});
+			}
+
+
+		});
+
+		
+		
+		document.addEventListener('DOMContentLoaded', function () {
+			const menuBtn = document.getElementById('menu-btn');
+			const menu = document.getElementById('menu');
+
+			menuBtn.addEventListener('click', function () {
+				menu.classList.toggle('show');
+			});
+		});
+	</script>
+
+</body>
+
+</html>

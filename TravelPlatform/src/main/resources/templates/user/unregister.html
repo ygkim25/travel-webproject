@@ -1,0 +1,33 @@
+<html>
+
+<head xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8" />
+	<title>회원탈퇴</title>
+	<link href="/assets/css/register.css" rel="stylesheet">
+	
+</head>
+
+<body>
+	<div class="register-container">
+		<img src="/images/logo.png" alt="" width="250" height="50" />
+		<div class="register-header">
+			<span class="separator"></span>
+			<h5>회원탈퇴</h5>
+			<span class="separator"></span>
+		</div>
+		<h3>정말 회원탈퇴를 하시겠습니까?</h3>
+		<form th:action="@{/main/profile/unregister}" method="post">
+			<div class="form-group">
+				<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요"
+					required><br />
+				<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요"
+					required><br />
+				<div th:if="${passwordEqualError}" th:text="${passwordEqualError}" class="password-error"></div>
+
+			</div>
+			<button type="submit" class="unregister-btn">탈퇴</button>
+		</form>
+	</div>
+</body>
+
+</html>

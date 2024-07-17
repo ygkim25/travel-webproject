@@ -1,0 +1,226 @@
+/* CSS for community-write.css */
+
+/* Body and Container Styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    /* Adjust as needed */
+    max-width: 1200px;
+    /* Adjust maximum width */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin 추가 */
+}
+
+/* Header Styles */
+header#header.alt {
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 100%; /* 전체 너비로 설정 */
+    height: 50px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    max-width: 1000px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin 추가 */
+}
+
+header#header h5#logo a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin-right: auto;
+    padding: 8px 15px;
+}
+
+header#header h5#logo a:hover {
+	transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 8px 15px;
+}
+
+header#header nav#nav ul {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+header#header nav#nav ul li {
+    margin-right: 10px;
+}
+
+header#header nav#nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 8px 15px;
+    display: block;
+}
+
+header#header nav#nav ul li a:hover {
+	transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button {
+    background-color: transparent;
+    color: #fff;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button:hover {
+	transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+}
+
+/* Form Styles */
+.modal-content {
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.modal-header {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.modal-header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+.input-group textarea {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    height: 250px;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group input[readonly] {
+    background-color: #f1f1f1;
+}
+
+.input-group input[type="file"] {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+.input-img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.input-img p {
+    font-size: 10px;
+    color: #999;
+    margin-right: 10px;
+    margin-top: auto;
+}
+
+.input-img img {
+    margin-left: 10px;
+}
+
+.btn-back {
+    float: right;
+}
+
+.btn-back a {
+    color: #666;
+}
+
+.btn-back a:hover {
+    text-decoration: underline;
+}
+
+.modal-footer {
+    padding-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-footer .btn {
+    background-color: #5b7484;
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 15px;
+    margin-right: 5px;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.modal-footer .btn:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.modal-footer .btn:last-child {
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+}
+
+.modal-footer .btn:last-child:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+@media (min-width:300px) and (max-width:530px) {
+    header#header.alt {
+        width: 100%; /* 컨테이너와 같은 너비로 설정 */
+    }
+    header#header nav#nav ul li a:not(.button) {
+        display: none; /* 로고와 로그아웃 버튼 제외하고 나머지 숨김 */
+    }
+}

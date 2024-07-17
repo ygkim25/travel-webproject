@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>로그인</title>
+
+	<link href="/assets/css/login.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="login-container">
+		<img src="/images/logo.png" alt="" width="250" height="50" />
+		<div class="login-header">
+			<span class="separator"></span>
+			<h5>로그인/회원가입</h5>
+			<span class="separator"></span>
+		</div>
+		<form th:action="@{/main/login}" method="post">
+			<div class="input-container">
+				<input type="text" id="email" name="email" placeholder="Email" class="form-control">
+				<button type="button" class="clear-button" onclick="clearInput('email')"></button>
+			</div>
+			<div class="input-container">
+				<input type="password" id="password" name="password" placeholder="Password" class="form-control">
+				<button type="button" class="clear-button" onclick="clearInput('password')"></button>
+			</div>
+			<div th:if="${loginError}" th:text="${loginError}" class="login-error"></div>
+			<button type="submit" class="login-button">Login</button>
+		</form>
+		<div class="help-links">
+			<a th:href="@{/main/find-email}">아이디 찾기</a>
+			<span>|</span>
+			<a th:href="@{/main/find-password}">비밀번호 찾기</a>
+		</div>
+
+
+		<div>
+			<button class="google-login-button" onclick="redirectToGoogle()">
+				<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+				구글로 시작하기
+			</button>
+			<button class="naver-login-button" onclick="redirectToNaver()">
+				<img src="/images/naver_logo.png" alt="Naver Logo" class="naver-login-logo">
+				네이버로 시작하기
+			</button>
+			<button class="kakao-login-button" onclick="redirectToKakao()">
+				<img src="/images/kakao_logo.png" alt="Kako Logo" class="kakao-login-logo">
+				카카오로 시작하기
+			</button>
+		</div>
+		<hr />
+		<p>계정이 없으십니까? <a th:href="@{/main/register}">회원가입</a></p>
+	</div>
+
+	<script>
+		function clearInput(id) {
+			document.getElementById(id).value = '';
+			document.getElementById(id).nextElementSibling.style.display = 'none';
+		}
+		document.querySelectorAll('.input-container input').forEach(input => {
+			input.addEventListener('input', function () {
+				if (this.value) {
+					this.nextElementSibling.style.display = 'inline';
+				} else {
+					this.nextElementSibling.style.display = 'none';
+				}
+			});
+		});
+		function redirectToGoogle() {
+			window.location.href = "/oauth2/authorization/google";
+		}
+		function redirectToNaver() {
+			window.location.href = "/oauth2/authorization/naver";
+		}
+		function redirectToKakao() {
+			window.location.href = "/oauth2/authorization/kakao";
+		}
+	</script>
+</body>
+
+</html>

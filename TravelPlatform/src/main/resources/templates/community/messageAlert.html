@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- 에러 메시지 -->
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Error Message Page</title>
+	</head>	
+	<body>
+		<script th:inline="javascript">
+			/*<![CDATA[ */
+				const message = /*[[${msg}]]*/ 'default';
+				const url = /*[[${url}]]*/ 'default';
+				
+				alert(message);
+				document.location.href = url;
+			/*]] */
+		</script>
+	</body>
+</html>

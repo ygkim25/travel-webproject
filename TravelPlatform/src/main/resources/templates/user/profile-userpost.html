@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.122.0">
+	<title>마이 페이지</title>
+
+	<!-- Stylesheets -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/profile.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+	<!-- Header -->
+	<header id="header" class="alt">
+			<h5 id="logo">
+				<a th:href="@{/main}"><img src="/images/logo.png" width="200" height="45" alt="Logo"></a>
+			</h5>
+
+		<nav id="nav">
+			<ul>
+				<li class=""><a th:href="@{/main}">Home</a></li>
+				<li><a th:href="@{/main/community/gallery}">Gallery</a></li>
+					<li th:if="${nickname != null}"><a th:href="@{/main/community}">Community</a>
+					</li>
+					<li th:if="${nickname != null}">
+						<a class="button" th:href="@{/main/logout}">Logout</a>
+					</li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Left Navigation -->
+			<div class="col-md-3 left-panel">
+				<h1 class="h3">마이 페이지</h1><br />
+				<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<a class="nav-link" id="v-pills-info-tab" data-toggle="pill" role="tab"
+						th:href="@{/main/profile/user-info}" aria-controls="v-pills-info" aria-selected="true">내 정보</a>
+					<a class="nav-link active" id="v-pills-posts-tab" data-toggle="pill" role="tab"
+						th:href="@{/main/profile/user-posts}" aria-controls="v-pills-posts" aria-selected="false">내
+						게시글</a>
+					<a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill" role="tab"
+						th:href="@{/main/profile/user-wishlist}" aria-controls="v-pills-wishlist"
+						aria-selected="false">찜 목록</a>
+					<a class="nav-link text-danger" th:href="@{/main/logout}">로그아웃</a>
+				</div>
+			</div>
+
+			<!-- Right Panel -->
+			<div class="col-md-9 right-panel">
+				<div class="tab-content" id="v-pills-tabContent">
+
+					<!-- 내 게시글 탭 -->
+					<div class="tab-pane fade show active" id="v-pills-posts" role="tabpanel"
+						aria-labelledby="v-pills-posts-tab">
+						<h3>내 게시글</h3><br /><br />
+						<section>
+							<ul class="list-unstyled">
+								<li th:each="board, iterStat : ${userPostPage}" th:data-board-id="${board.seq}"
+									class="board-li">
+									<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="go-post">
+										<div class="d-flex align-items-center">
+											<div class="img">
+												<img th:if="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+													alt="게시글 이미지" class="img-thumbnail" />
+												<img th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													src="/images/visit4.jpg" alt="기본 이미지" class="img-thumbnail" />
+											</div>
+											<div class="content-container">
+												<div class="board-title">
+													<h6 th:text="${board.title}"></h6>
+													<div class="board-writer" th:text="${board.writer}"></div>
+													<div class="board-createdate"
+														th:text="${#dates.format(board.CreateDate, 'yyyy MM dd')}">
+													</div>
+												</div>
+												<div class="board-stats">
+													<div class="board-count">
+														<i class="fas fa-comments"></i>
+														<small class="badge" th:text="${board.commentCount}"></small>
+													</div>
+													<div class="board-cnt">
+														<i class="fas fa-eye"></i>
+														<small class="badge" th:text="${board.cnt}"></small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li class="page-item" th:classappend="${userPostPage.hasPrevious() ? '' : 'disabled'}">
+							<a class="page-link"
+								th:href="@{/main/profile/user-posts(curPage=${userPostPage.number - 1}, rowSizePerPage=${rowSizePerPage})}">Previous</a>
+						</li>
+						<li class="page-item" th:each="pageNum : ${#numbers.sequence(1, pagingInfo.totalPageCount)}"
+							th:classappend="${pageNum == pagingInfo.curPage + 1 ? 'active' : ''}">
+							<a class="page-link"
+								th:href="@{/main/profile/user-posts(curPage=${pageNum - 1}, rowSizePerPage=${rowSizePerPage})}"
+								th:text="${pageNum}">1</a>
+						</li>
+						<li class="page-item" th:classappend="${userPostPage.hasNext() ? '' : 'disabled'}">
+							<a class="page-link"
+								th:href="@{/main/profile/user-posts(curPage=${userPostPage.number + 1}, rowSizePerPage=${rowSizePerPage})}">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

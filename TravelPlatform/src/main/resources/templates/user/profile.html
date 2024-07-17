@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.122.0">
+	<title>마이 페이지</title>
+
+	<!-- Stylesheets -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/profile.css" />
+
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+</head>
+
+<body>
+
+	<header id="header" class="alt">
+			<h5 id="logo">
+				<a th:href="@{/main}"><img src="/images/logo.png" width="200" height="45" alt="Logo"></a>
+			</h5>
+
+		<nav id="nav">
+			<ul>
+				<li class=""><a th:href="@{/main/community}">Home</a></li>
+				<li><a th:href="@{/main/community/gallery}">Gallery</a></li>
+				<th:block th:if="${nickname != null}">
+					<li th:if="${nickname != null}"><a th:href="@{/main/community}">Community</a>
+					</li>
+
+					<li th:if="${nickname != null}">
+						<a class="button" th:href="@{/main/logout}">Logout</a>
+
+					</li>
+
+				</th:block>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<!-- Left Navigation -->
+			<div class="col-md-3 left-panel">
+				<h3 class="h3">마이 페이지</h3><br />
+				<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<div>
+						<a class="nav-link active" id="v-pills-info-tab" data-toggle="pill" role="tab"
+							th:href="@{/main/profile/user-info}" aria-controls="v-pills-info" aria-selected="true">내
+							정보</a>
+					</div>
+					<a class="nav-link" id="v-pills-posts-tab" data-toggle="pill" role="tab"
+						th:href="@{/main/profile/user-posts}" aria-controls="v-pills-posts" aria-selected="false">내
+						게시글</a>
+					<a class="nav-link" id="v-pills-wishlist-tab" data-toggle="pill" role="tab"
+						th:href="@{/main/profile/user-wishlist}" aria-controls="v-pills-wishlist"
+						aria-selected="false">찜 목록</a>
+					<a class="nav-link text-danger" th:href="@{/main/logout}">로그아웃</a>
+				</div>
+			</div>
+
+			<!-- Right Panel -->
+			<div class="col-md-9 right-panel">
+				<div class="tab-content" id="v-pills-tabContent">
+					<!-- 내 정보 탭 -->
+					<div class="tab-pane fade show active" id="v-pills-info" role="tabpanel"
+						aria-labelledby="v-pills-info-tab">
+						<h3>내 정보 관리</h3><br /><br />
+						<h5>회원 정보</h5>
+						<hr />
+						<div class="user-info-container">
+							<div class="user-info">
+								<label>이름</label>
+								<span th:text="${username}" class="user-info-text"></span>
+							</div>
+							<div class="user-info">
+								<label>닉네임</label>
+								<span th:text="${nickname}" class="user-info-text"></span>
+								<button class="btn" onclick="openNicknameModal()">닉네임 변경</button>
+							</div>
+							<div class="user-info">
+								<label>이메일</label>
+								<span th:text="${email}" class="user-info-text"></span>
+							</div>
+							<div class="user-info" th:if="${!isLoggedIn}">
+								<label>생년월일</label>
+								<span th:text="${userbirth}" class="user-info-text"></span>
+							</div>
+							<div class="user-info" th:if="${isLoggedIn}">
+								<label>로그인 플랫폼</label>
+								<span th:text="${provider}" class="user-info-text"></span>
+							</div>
+						</div>
+						<br />
+						<div th:if="${!isLoggedIn}">
+							<form th:action="@{/main/profile/user-info}" method="post">
+							    <h5>비밀번호 변경</h5>
+							    <hr />
+							    <div class="form-container">
+							        <div class="form-group">
+							            <label for="password">현재 비밀번호</label>
+							            <input type="password" class="form-control" id="password" name="password">
+										<div th:if="${equalError}" th:text="${equalError}" class="password-error"></div>
+							        </div>
+							        <div class="form-group">
+							            <label for="newPassword">새 비밀번호</label>
+							            <input type="password" class="form-control" id="newPassword" name="newPassword">
+										<div th:if="${passwordLengthError}" th:text="${passwordLengthError}" class="password-error"></div>
+										<div th:if="${passwordPatternError}" th:text="${passwordPatternError}" class="password-error"></div>
+							        </div>
+							        <div class="form-group button-group">
+							            <div class="btn-container">
+							                <button type="submit" class="btn">비밀번호 변경</button>
+							            </div>
+							        </div>
+							    </div>
+							    <div class="unregister">
+							        <p class="float-end">더이상 이용하지 않으신가요? <a th:href="@{/main/profile/unregister}">회원탈퇴</a></p>
+							    </div>
+							</form>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="nicknameModal" tabindex="-1" aria-labelledby="nicknameModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="nicknameForm" th:action="@{/main/profile/nickname}" method="post">
+					<div class="modal-header">
+						<h5 class="modal-title" id="nicknameModalLabel">닉네임 변경</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="newNickname">새 닉네임</label>
+							<input type="text" class="form-control" id="newNickname" name="nickname" required>
+							<div id="nicknameError" class="text-danger"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						<button type="submit" class="btn btn-primary">변경</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+	<!-- Custom JS -->
+	<script>
+		function openNicknameModal() {
+			var myModal = new bootstrap.Modal(document.getElementById('nicknameModal'), {
+				keyboard: false
+			});
+			myModal.show();
+		}
+
+		// CSRF 토큰을 가져오는 함수
+		function getCsrfToken() {
+			return $("meta[name='_csrf']").attr("content");
+		}
+
+		function getCsrfHeader() {
+			return $("meta[name='_csrf_header']").attr("content");
+		}
+
+		// Handle nickname form submission with AJAX
+		$('#nicknameForm').on('submit', function (e) {
+			e.preventDefault();
+			var nickname = $('#newNickname').val();
+			$.ajax({
+				type: 'POST',
+				url: $(this).attr('action'),
+				data: {nickname: nickname},
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
+				},
+				success: function (response) {
+					if (response.nicknameEqualError) {
+						$('#nicknameError').text(response.nicknameEqualError);
+					} else {
+						$('#nicknameModal').modal('hide');
+						$('#nicknameForm')[0].reset();
+						// Optionally, update the nickname on the page without reloading
+						$('.user-info-text').filter((_, el) => $(el).text() === nickname).text(nickname);
+						window.location.reload();
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error('AJAX Error: ', status, error);
+				}
+			});
+		});
+		
+
+	</script>
+</body>
+
+</html>

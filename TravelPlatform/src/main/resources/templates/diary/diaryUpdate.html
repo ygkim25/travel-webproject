@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+	
+    <title>글 수정</title>
+	
+	<style>
+		body {
+		    font-family: Arial, sans-serif;
+		    margin: 0;
+		    padding: 0;
+		    background-color: #f4f4f9;
+			font-family: "Noto Sans KR", sans-serif;
+			font-optical-sizing: auto;
+			font-weight: 400;
+			font-style: normal;
+		}
+		
+		.banner {
+			background-color: lightslategray;
+			height: 80px;
+			display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    padding: 0 1rem;
+		    flex-wrap: wrap;
+		    position: relative;
+			border-radius: 5px;
+		}
+		
+		.mainLogo{
+			width: 65px;
+			height: 15px;
+		}
+		
+		.logo {
+		    height: 50px;
+		    margin-right: 1rem;
+		    margin-left: 20em;
+		    position: absolute;
+		    left: 0;
+		}
+		
+		.userlogo {
+		    margin-right: 20em;
+		    position: absolute;
+		    right: 0;
+			color: white;
+		    font-weight: 500;
+		    text-decoration: none;
+		}
+
+		.banner h1 {
+		    margin: 0 auto;
+			color: white;
+			
+		}
+
+		.write-form {
+		    max-width: 600px;
+		    margin: 50px auto;
+		    padding: 20px;
+		    background-color: #fff;
+		    border-radius: 5px;
+		    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		h2 {
+		    margin-top: 0;
+			text-align: center;
+		}
+
+		label {
+		    display: block;
+		    margin-top: 20px;
+			margin-bottom: 10px;
+		}
+
+		input[type="text"],
+		textarea,
+		input[type="date"] {
+		    width: 100%;
+		    padding: 10px;
+		    margin-top: 5px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		    box-sizing: border-box;
+		}
+
+		textarea {
+		    resize: vertical;
+		    height: 150px;
+		}
+
+		button {
+		    background-color: #4CAF50;
+		    color: white;
+		    border: none;
+		    padding: 10px 20px;
+		    margin-top: 20px;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+
+		button:hover {
+		    background-color: #45a049;
+		}
+		
+		
+		@media (max-width:450px) {
+			.banner {
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    padding: 0 1rem;
+			    flex-wrap: wrap;
+			    position: relative;
+			}
+			
+			.logo {
+			    height: 25px;
+			    width: 70px;
+			    margin-right: 1rem;
+			    margin-left: 1em;
+			    position: absolute;
+			    left: 0;
+			}
+			
+			.mainLogo{
+				width: 65px;
+				height: 15px;
+			}
+			
+			.userlogo {
+			    margin-right: 1em;
+			    position: absolute;
+			    right: 0;
+			    text-decoration: none; 
+			    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+			    color: white; 
+			    font-size: 10px;
+			}
+			
+			.banner h1 {
+			    margin: 0 auto;
+			    font-size: 20px;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+	<header>
+        <div class="banner">
+            <a th:href="@{/main}" class="logo"><img src="/images/logo.png" alt="Logo" class="mainLogo"><br /></a>
+            <h1>나만의 여행일지</h1>
+            <a th:href="@{/main/profile}" th:text="${nickname} + ' 님'" class="userlogo"></a>
+        </div>
+    </header>
+    <div class="write-form">
+        <h2>내가 다녀 온 나만의 여행 일지 수정</h2>
+        <form id="write-form" th:action="@{/traveldiary/diaryUpdate}" method="post" name="updateForm" enctype="multipart/form-data">
+			<input type="hidden" name="listNumber" th:value="${diaryUpdate.listNumber}">
+            <label for="title">글 제목</label>
+            <input type="text" id="title" name="diaryTitle" th:value="${diaryUpdate.diaryTitle}" required>
+            
+            <label for="content">글 내용</label>
+			<textarea id="content" name="diaryContent" cols="30" rows="10" required>[[${diaryUpdate.diaryContent}]]</textarea>
+
+            <label for="location">위치</label>
+            <input type="text" id="location" name="diaryLocation" th:value="${diaryUpdate.diaryLocation}" required>
+            
+            <label for="date">날짜</label>
+            <input type="date" id="date" name="diaryDate" th:value="${diaryUpdate.diaryDate}" required>
+            
+			
+			<label for="file">이미지 첨부</label>
+			<input type="file" id="file" name="file" th:value="${diaryUpdate.diaryImages}" multiple><br>
+			
+            <button type="submit" onclick="diaryUpdate()">글 수정</button>
+			
+			<button type="button" onclick="backReq()">되돌아가기</button>
+        </form>
+		
+		
+    </div>
+	
+	<script>
+		
+		// 파일 선택 시 이미지 미리보기 함수
+        function previewImage() {
+            var fileInput = document.getElementById('file');
+            var currentImage = document.getElementById('currentImage');
+            
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    currentImage.src = e.target.result;
+                }
+                
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+		
+		
+		const diaryUpdate = () => {
+			document.diaryUpdate.submit();
+			location.href = "/traveldiary";
+		}
+		
+		const backReq = () => {
+			var confirmationMessage = '되돌아가시면 작성하신 글이 저장되지 않습니다.\n되돌아가시겠습니까?';
+
+	        if (confirm(confirmationMessage)) {
+	            // '예'를 선택한 경우
+	            location.href = "/main/traveldiary"; // 원하는 페이지로 이동
+	        } else {
+	            // '아니요' 또는 '취소'를 선택한 경우
+	            // 아무 동작도 수행하지 않습니다.
+	        }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.122.0">
+	<title>여행 커뮤니티 저기 어때?</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/main.css" rel="stylesheet">
+	<link href="/assets/css/carousel.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+</head>
+
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="check2" viewBox="0 0 16 16">
+			<path
+				d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+		</symbol>
+		<symbol id="circle-half" viewBox="0 0 16 16">
+			<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+		</symbol>
+		<symbol id="moon-stars-fill" viewBox="0 0 16 16">
+			<path
+				d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+			<path
+				d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+		</symbol>
+		<symbol id="sun-fill" viewBox="0 0 16 16">
+			<path
+				d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+		</symbol>
+	</svg>
+
+	<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+		<div id="kakao-talk-channel-chat-button" data-channel-public-id="_snxlLG" data-title="consult" data-size="large"
+			data-color="yellow" data-shape="pc" data-support-multiple-densities="true"></div>
+		<script>
+			window.kakaoAsyncInit = function () {
+				Kakao.Channel.createChatButton({
+					container: '#kakao-talk-channel-chat-button',
+				});
+			};
+
+			(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.channel.min.js';
+				js.integrity = 'sha384-PFe+C2S6aXd8v5j//vBqNPP8DMpEqLOw05p9BBajfh7IDWnUTHhNlu+Uxj3wxNej';
+				js.crossOrigin = 'anonymous';
+				fjs.parentNode.insertBefore(js, fjs);
+			})(document, 'script', 'kakao-js-sdk');
+		</script>
+	</div>
+
+	<header>
+		<div class="banner">
+			<div class="search-zone">
+				<form th:action="@{/main/search}" method="get">
+					<input type="search" name="searchWord" placeholder="검색" aria-label="Search">
+					<button class="btn btn-outline-light btn-lg" id="search-button" type="submit">검색</button>
+				</form>
+			</div>
+			<img src="/images/logo.png" alt="Logo" class="mainLogo"><br />
+			<div class="login-box" th:if="${isLoggedIn}">
+				<a th:href="@{/main/profile/user-info}" th:text="${nickname != null ? nickname +'님' :'닉네임을 설정해주세요'}"
+					class="welcome-message m-0" id="welcomeMessage"></a>
+
+			</div>
+			<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+				<button id="logout-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+			</form>
+			<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+				<button id="login-button" type="submit" class="btn btn-outline-light btn-lg ms-2">로그인</button>
+			</form>
+
+			<a href="#" class="menu-btn" id="menu-btn">
+				<span>Menu</span>
+				<div></div>
+			</a>
+			<div class="menu" id="menu">
+				<ul>
+					<li>
+						<input type="search" placeholder="검색" aria-label="Search">
+						<button class="btn btn-outline-light btn-lg" id="m-search-button" type="submit">검색</button>
+
+					</li>
+					<li>
+						<form th:action="@{/main/logout}" method="get" th:if="${isLoggedIn}">
+							<button id="m-logout-button" type="submit"
+								class="btn btn-outline-light btn-lg ms-2">로그아웃</button>
+						</form>
+						<form th:action="@{/main/login}" method="get" th:if="${!isLoggedIn}">
+							<button id="m-login-button" type="submit"
+								class="btn btn-outline-light btn-lg ms-2">로그인</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+					aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<a th:href="@{/main/community}"><img src="images/background1.jpg" class="d-block w-100"
+							alt="Description of image 1"></a>
+					<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+						<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					</svg>
+					<div class="container">
+						<div class="carousel-caption">
+							<p>여행지에 대한 다른 유저들의 정보를 얻고싶으신가요?</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="carousel-item">
+					<a th:href="@{/main/traveldiary}"><img src="images/background2.jpg" class="d-block w-100"
+							alt="Description of image 1"></a>
+					<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+						<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					</svg>
+					<div class="container">
+						<div class="carousel-caption">
+							<p>즐거웠던 여행을 일지에 적어보세요!</p>
+							<p>가고싶은 여행지를 위시리스트에 담아주세요!</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<a th:href="@{/main/community/gallery}"><img src="images/background3.jpg" class="d-block w-100"
+							alt="Description of image 1"></a>
+					<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+						<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					</svg>
+					<div class="container">
+						<div class="carousel-caption text-end">
+
+							<p>내가 올린 게시글의 사진을 한번에 보고싶으신가요?</p>
+							<!--							<p><a class="btn btn-lg btn-primary" th:href="@{/main/community/gallery}">갤러리</a></p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+
+
+		<!-- Marketing messaging and featurettes
+  ================================================== -->
+		<!-- Wrap the rest of the page in another container to center all the content. -->
+
+		<div class="container marketing">
+
+			<!-- Three columns of text below the carousel -->
+			<div class="row">
+				<div class="col-lg-4">
+					<img class="bd-placeholder-img rounded-circle" src="images/communityimg.png" alt="" width="140"
+						height="140" style="margin-bottom: 20px;" xmlns="http://www.w3.org/2000/svg" role="img"
+						aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					<h2 class="fw-normal">커뮤니티</h2>
+					<p>여행 커뮤니티, 함께하는 여정을 기록하고<br>나누는 공간입니다.</p>
+					<p><a class="btn btn-secondary" th:href="@{/main/community}">바로가기</a></p>
+				</div><!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<img class="bd-placeholder-img rounded-circle" src="images/mytraveldiaryimg.png" alt="" width="140"
+						style="margin-bottom: 20px;" height="140" xmlns="http://www.w3.org/2000/svg" role="img"
+						aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					<h2 class="fw-normal">나만의 여행일지</h2>
+					<p>나만의 여정을 기록하는 특별한 공간,<br>함께해요!</p>
+					<p><a class="btn btn-secondary" th:href="@{/main/traveldiary}">바로가기</a></p>
+				</div><!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<img class="bd-placeholder-img rounded-circle" src="images/galleryimg.png" alt="" width="140"
+						height="140" style="margin-bottom: 20px;" xmlns="http://www.w3.org/2000/svg" role="img"
+						aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+					<!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg> -->
+					<h2 class="fw-normal">사진 갤러리</h2>
+					<p>여행의 순간을 담은 갤러리, 지금 떠나요!<br />갤러리</p>
+					<p><a class="btn btn-secondary" th:href="@{/main/community/gallery}">바로가기</a></p>
+				</div><!-- /.col-lg-4 -->
+			</div><!-- /.row -->
+			<div class="row featurette">
+				<hr />
+				<h3>커뮤니티 <img src="images/communitylogo.png"></h3>
+				<div class="community">
+					<div class="community-all">
+						<div class="community-header">
+							<h6>전체글</h6>
+							<a th:href="@{/main/community}" class="community-button">더보기 ></a>
+						</div>
+						<section>
+							<ul class="list-unstyled">
+								<li th:each="board, iterStat : ${pagedResult}" th:data-board-id="${board.seq}"
+									class="mb-3">
+									<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="go-post">
+										<div class="d-flex align-items-center">
+											<div class="img">
+												<img th:if="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+													alt="게시글 이미지" class="img-thumbnail" />
+												<img th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													src="/images/visit4.jpg" alt="기본 이미지" class="img-thumbnail" />
+											</div>
+											<div class="content-container">
+												<div class="board-title">
+													<h6 th:text="${board.title}"></h6>
+													<div class="board-writer" th:text="${board.writer}"></div>
+													<div class="board-createdate"
+														th:text="${#dates.format(board.CreateDate, 'yyyy MM dd')}">
+													</div>
+												</div>
+												<div class="board-stats">
+													<div class="board-count">
+														<i class="fas fa-comments"></i>
+														<small class="badge" th:text="${board.commentCount}"></small>
+													</div>
+													<div class="board-cnt">
+														<i class="fas fa-eye"></i>
+														<small class="badge" th:text="${board.cnt}"></small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</section>
+					</div>
+					<div class="community-top">
+						<div class="community-header">
+							<h6>인기글</h6>
+							<a th:href="@{/main/community}" class="community-button">더보기 ></a>
+						</div>
+						<section>
+							<ul class="list-unstyled">
+								<li th:each="board, iterStat : ${topResult}" th:data-board-id="${board.seq}"
+									class="mb-3">
+									<a th:href="@{/main/community/post-detail(seq=${board.seq})}" class="go-post">
+										<div class="d-flex align-items-center">
+											<div class="img">
+												<img th:if="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													th:src="@{'/upload/' + ${board.writer} + '/' + 's_' + ${board.ProcessedFileNames[0]}}"
+													alt="게시글 이미지" class="img-thumbnail" />
+												<img th:unless="${not #lists.isEmpty(board.ProcessedFileNames)}"
+													src="/images/visit4.jpg" alt="기본 이미지" class="img-thumbnail" />
+											</div>
+											<div class="content-container">
+												<div class="board-title">
+													<h6 th:text="${board.title}"></h6>
+													<div class="board-writer" th:text="${board.writer}"></div>
+													<div class="board-createdate"
+														th:text="${#dates.format(board.CreateDate, 'yyyy MM dd')}">
+													</div>
+												</div>
+												<div class="board-stats">
+													<div class="board-count">
+														<i class="fas fa-comments"></i>
+														<small class="badge" th:text="${board.commentCount}"></small>
+													</div>
+													<div class="board-cnt">
+														<i class="fas fa-eye"></i>
+														<small class="badge" th:text="${board.cnt}"></small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container-mytravelDiary">
+				<div class="container-subject">
+					<h3>나만의 여행일지 <img src="images/memologo.png"></h3>
+				</div>
+				<div th:if="${isLoggedIn}">
+					<div class="grid-container">
+						<div th:each="diary, iterStat : ${diaryList}" class="grid-item">
+							<div class="mainDiaryThumbnail" onclick="window.location='/main/traveldiary'">
+								<div class="mainDiaryThumbnailImage">
+									<img th:src="${#arrays.isEmpty(diary.diaryImages) ? '/static/uploadsImages/default-thumbnail.png' : diary.diaryImages.split(',')[0]}"
+										style="max-width: 100%; max-height: 200px;">
+								</div>
+								<div class="mainDiaryThumbnailContentBox">
+									<div class="mainDiaryThumbnailTitle"
+										th:if="${#strings.length(diary.diaryTitle) >= 8}"
+										th:text="'제목 : ' + ${#strings.substring(diary.diaryTitle, 0, 8) + '...'}"></div>
+									<div class="mainDiaryThumbnailTitle"
+										th:unless="${#strings.length(diary.diaryTitle) >= 8}"
+										th:text="'제목 : ' + ${diary.diaryTitle}"></div>
+
+									<div class="mainDiaryThumbnailLocation"
+										th:if="${#strings.length(diary.diaryLocation) >= 8}"
+										th:text="'위치 : ' + ${#strings.substring(diary.diaryLocation, 0, 8) + '...'}">
+									</div>
+									<div class="mainDiaryThumbnailLocation"
+										th:unless="${#strings.length(diary.diaryLocation) >= 8}"
+										th:text="'위치 : ' + ${diary.diaryLocation}"></div>
+
+									<div class="mainDiaryThumbnailDate"
+										th:text="'날짜 : ' + ${#temporals.format(diary.diaryDate, 'yyyy-MM-dd')}"></div>
+
+									<div class="mainDiaryThumbnailContent"
+										th:if="${#strings.length(diary.diaryContent) >= 8}"
+										th:text="'내용 : ' + ${#strings.substring(diary.diaryContent, 0, 8) + '...'}">
+									</div>
+									<div class="mainDiaryThumbnailContent"
+										th:unless="${#strings.length(diary.diaryContent) >= 8}"
+										th:text="'내용 : ' + ${diary.diaryContent}"></div>
+								</div>
+							</div>
+						</div>
+						<div class="myDiaryDataEmpty" th:if="${myDiaryDataEmpty}">
+							<h1 style="text-align: center;">나만의 여행일지 데이터가 없습니다.<br>일지를 작성해주세요.</h1>
+							<h4><a href="main/traveldiary" class="btn btn-dark btn-lg"
+									style="margin-top: 10px;">작성하러가기</a></h4>
+						</div>
+					</div>
+
+					<div class="row featurette justify-content-center mt-4" th:unless="${myDiaryDataEmpty}">
+						<h4 style="text-align: center;"><a href="main/traveldiary" class="btn btn-dark btn-lg">더 보기</a>
+						</h4>
+					</div>
+				</div>
+
+
+				<div class="logout-mainDiaryThumnail-container" th:unless="${isLoggedIn}">
+					<div class="logout-mainDiaryThumnail">
+						<div class="logout-diary-grid-container">
+							<div class="logout-diary-grid-item">
+								<div class="logout-diary-thumbnail" onclick="window.location='/main/traveldiary'">
+									<div class="logout-thumbnail-image">
+										<img src="/uploadsImages/noImage.png"
+											style="max-width: 100%; max-height: 150px;">
+									</div>
+									<div class="logout-thumbnail-content-box">
+										<div class="logout-thumbnail-title">제목 : 다이어리 제목...</div>
+										<div class="logout-thumbnail-location">위치 : 다이어리 위치...</div>
+										<div class="logout-thumbnail-date">날짜 : 2024-06-26</div>
+										<div class="logout-thumbnail-content">내용 : 다이어리 내용...</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="logout-diary-grid-item">
+								<div class="logout-diary-thumbnail" onclick="window.location='/main/traveldiary'">
+									<div class="logout-thumbnail-image">
+										<img src="/uploadsImages/default-thumbnail.png"
+											style="max-width: 100%; max-height: 150px;">
+									</div>
+									<div class="logout-thumbnail-content-box">
+										<div class="logout-thumbnail-title">제목 : 다이어리 제목...</div>
+										<div class="logout-thumbnail-location">위치 : 다이어리 위치...</div>
+										<div class="logout-thumbnail-date">날짜 : 2024-06-26</div>
+										<div class="logout-thumbnail-content">내용 : 다이어리 내용...</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="logout-diary-grid-item">
+								<div class="logout-diary-thumbnail" onclick="window.location='/main/traveldiary'">
+									<div class="logout-thumbnail-image">
+										<img src="/uploadsImages/default-thumbnail.png"
+											style="max-width: 100%; max-height: 150px;">
+									</div>
+									<div class="logout-thumbnail-content-box">
+										<div class="logout-thumbnail-title">제목 : 다이어리 제목...</div>
+										<div class="logout-thumbnail-location">위치 : 다이어리 위치...</div>
+										<div class="logout-thumbnail-date">날짜 : 2024-06-26</div>
+										<div class="logout-thumbnail-content">내용 : 다이어리 내용...</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="logout-diary-grid-item">
+								<div class="logout-diary-thumbnail" onclick="window.location='/main/traveldiary'">
+									<div class="logout-thumbnail-image">
+										<img src="/uploadsImages/noImage.png"
+											style="max-width: 100%; max-height: 150px;">
+									</div>
+									<div class="logout-thumbnail-content-box">
+										<div class="logout-thumbnail-title">제목 : 다이어리 제목...</div>
+										<div class="logout-thumbnail-location">위치 : 다이어리 위치...</div>
+										<div class="logout-thumbnail-date">날짜 : 2024-06-26</div>
+										<div class="logout-thumbnail-content">내용 : 다이어리 내용...</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="blur-text">로그인이 필요한 서비스 입니다. <a href="/main/login">로그인</a> 해주세요</div>
+
+
+
+
+					<!--			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
+							class="text-body-secondary">Checkmate.</span></h2>
+					<p class="lead">And yes, this is the last block of representative placeholder content. Again, not
+						really intended to be actually read, simply here to give you a better view of what this would
+						look like with some actual content. Your content.</p>
+				</div>
+				<div class="col-md-5">
+					<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+						height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+						<title>Placeholder</title>
+						<rect width="100%" height="100%" fill="var(--bs-secondary-bg)" /><text x="50%" y="50%"
+							fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+					</svg>
+				</div>
+			</div>-->
+
+					<hr class="featurette-divider">
+
+					<!-- /END THE FEATURETTES -->
+
+				</div><!-- /.container -->
+
+
+				<!-- FOOTER -->
+				<footer class="container">
+					<p class="float-end"><a href="#">Back to top</a></p>
+
+				</footer>
+	</main>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const menuBtn = document.getElementById('menu-btn');
+			const menu = document.getElementById('menu');
+
+			menuBtn.addEventListener('click', function () {
+				menu.classList.toggle('show');
+			});
+		});
+
+	</script>
+</body>
+
+</html>

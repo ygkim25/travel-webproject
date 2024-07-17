@@ -1,0 +1,447 @@
+
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+
+body {
+    padding-bottom: 3rem;
+    color: rgb(var(--bs-tertiary-color-rgb));
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f7f9fc;
+}
+
+/* 본문 */
+.content-wrapper {
+   position: relative;
+   padding: 5px;
+   margin-bottom: 10px;
+   overflow: auto;
+}
+
+.content {
+   overflow: hidden;
+   white-space: pre-wrap;
+   word-wrap: break-word;
+   padding: 5px;
+}
+
+#image-container {
+   display: flex;
+   flex-wrap: nowrap;
+   gap: 10px;
+}
+
+#image-container img {
+   width: 300px;
+   height: 300px;
+   object-fit: cover;
+
+}
+
+/* 댓글란 */
+.container {
+   display: block;
+}
+
+.comment-form {
+   display: block;
+   width: 100%;
+}
+
+.comment-input,
+.comment-text,
+.comment-form-button {
+   display: block;
+   width: 100;
+   margin-bottom: 10px;
+   padding: 8px;
+   box-sizing: border-box;
+}
+
+.container {
+   display: block;
+}
+
+.comment-form {
+   display: block;
+   width: 100%;
+}
+
+.comment-input,
+.comment-text,
+.comment-form-button {
+   display: block;
+   width: 100;
+   margin-bottom: 10px;
+   padding: 8px;
+   box-sizing: border-box;
+}
+
+
+.json-container {
+   background-color: #f9f9f9;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-bottom: 20px;
+}
+
+.json-container h3 {
+   font-weight: bold;
+   margin-bottom: 10px;
+   text-align: left;
+   padding: 20px 0 10px 0;
+   font-size: 24px;
+   color: #333;
+}
+
+.json-entry {
+   margin-bottom: 20px;
+   padding: 10px;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   text-align: left;
+   padding: 10px 0;
+}
+
+.day-counter {
+   display: inline-block;
+   padding-left: 10px;
+   font-weight: bold;
+   font-size: 1em;
+   line-height: 1;
+}
+
+.day-counter strong {
+   display: inline-block;
+   padding: 8px;
+   color: black;
+   font-size: 1.2em;
+   border-radius: 50%;
+   width: 30px;
+   height: 30px;
+   text-align: center;
+   line-height: 12px;   
+   vertical-align: middle;   
+   position: relative;
+   top: -2px;
+   margin-right: 1px;
+
+}
+
+.content-wrapper {
+   padding: 10px;
+   border-radius: 5px;
+   margin-bottom: 20px;
+
+}
+
+.content {
+   font-size: 16px;
+   line-height: 1.6;
+   color: #555;
+}
+
+.card-header,
+.card-body,
+.list-group-item,
+.card-footer {
+   text-align: left;
+}
+.card-text {
+   word-wrap: break-word;
+   white-space: pre-wrap;
+}
+.com-comment .com-comment1{
+	display: flex;
+    justify-content: space-between;
+}
+.com-post-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.com-post-title img {
+    width: 150px;
+    height: 90px;
+}
+
+.com-post-title .card-title {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+}
+.com-post-nick{
+	padding: 2%;
+	display: flex;
+    justify-content: space-between;
+}
+
+/*.card-header h1.card-title {*/
+/*    font-weight: 900;*/
+/*   margin-top: 10px;*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+/*.card-header p.card-text {*/
+/*   margin-bottom: 5px;*/
+/*}*/
+
+.com-totalcom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.com-totalcom button {
+	height: 40px;
+}
+
+
+.com-totalcom img {
+    height: 98px;
+    width: 180px;
+    margin-right: 20px;
+}
+
+.com-update-btn {
+   margin-top: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 15px;
+   
+}
+.a-button{
+	background-color: #5b7484;
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 15px;
+    margin-right: 5px;
+    border: none;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+.a-button:hover{
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+.button{
+	background-color: #5b7484;
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 15px;
+    margin-right: 5px;
+    border: none;
+    transition: background-color 0.2s;
+}
+.button:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+.button1{
+	background-color: rgb(0, 0, 0);
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 15px;
+    margin-right: 5px;
+    border: none;
+    transition: background-color 0.2s;
+}
+.button1:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+.card {
+   padding: 14px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.com-post {
+	width: 100%;
+}
+
+.com-post-secon {
+	padding: 0;
+}
+
+.com-post-a {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 15px 10px;
+}
+
+.com-post-b {
+   display: flex;   
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   margin: 10px 0 50px;
+   padding-left: 10px;
+}
+
+.com-post-c {
+   display: flex;
+   flex-direction: column;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    min-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.com-post-c p {
+	display: flex;
+	padding: 15px 10px;
+}
+
+.com-post-comment {
+	width: 100%;
+}
+
+.comment-secon {
+	width: 100%;
+}
+
+/* Header */
+
+
+header#header.alt {
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 100%;
+    /* 전체 너비로 설정 */
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    max-width: 1000px;
+    /* 최대 너비 설정 */
+    margin: 0 auto;
+    /* 가운데 정렬을 위해 margin 추가 */
+}
+
+header#header h5#logo a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin-right: auto;
+    padding: 8px 15px;
+}
+
+header#header h5#logo a:hover {
+   transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 8px 15px;
+}
+
+header#header nav#nav ul {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+header#header nav#nav ul li {
+    margin-right: 10px;
+}
+
+header#header nav#nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 8px 15px;
+    display: block;
+}
+
+header#header nav#nav ul li a:hover {
+   transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button {
+    background-color: transparent;
+    color: #fff;
+    border-radius: 5px;
+}
+
+header#header nav#nav ul li a.button:hover {
+   transition: background-color 0.2s;
+    background-color: white;
+    color: black;
+}
+
+
+
+
+
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel-container {
+    position: relative;
+    width: 100%; 
+  
+}
+
+.carousel {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.carousel-item {
+  height: 32rem; 
+  background-color: black;
+  overflow: hidden;
+}
+
+.carousel-item img {
+   max-width: 100%; 
+   max-height: 100%; 
+   height: auto;  
+   width: auto; 
+   object-fit: contain; 
+}
+
+
+/*--------------------- Mobile ---------------------*/
+
+
+@media (min-width:300px) and (max-width:450px) {
+	
+	.container {
+        max-width: 930px;
+    }
+	
+	
+}
+
+

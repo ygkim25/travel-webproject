@@ -1,0 +1,373 @@
+/* 기본 스타일 */
+body {
+	font-family: 'Arial', sans-serif;
+	/*	background-size: cover;*/
+	color: #333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+.login-container {
+	background: rgba(255, 255, 255, 0.8);
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	text-align: center;
+	width: 100%;
+	max-width: 320px;
+}
+
+.help-links {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.help-links a {
+	margin: 0 5px;
+	text-decoration: none;
+	color: #007bff;
+	font-size: 12px;
+}
+
+.help-links span {
+	margin: 0 5px;
+	color: #6c757d;
+}
+
+.form-control {
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+	border-color: #80bdff;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+.login-header {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.login-header h5 {
+	font-size: 12px;
+	margin: 0;
+	background-color: white;
+	padding: 0 5px;
+	z-index: 1;
+	/* 텍스트를 위로 띄웁니다 */
+	color: rgb(128, 128, 128);
+}
+
+.login-header::before,
+.login-header::after {
+	content: '';
+	flex: 1;
+	border-top: 1px solid #ccc;
+	margin: 0 5px;
+	z-index: 0;
+	/* 구분선을 텍스트 아래로 내립니다 */
+}
+
+label {
+	font-size: 16px;
+	color: #555;
+	display: block;
+	margin-top: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.login-error {
+	color: red;
+	font-size: 12px;
+}
+
+.login-button {
+	background-color: black;
+	display: block;
+	color: white;
+	padding: 10px;
+	width: 100%;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	margin-top: 10px;
+	box-sizing: border-box;
+}
+
+.login-button:hover {
+	background-color: rgb(73, 73, 73);
+}
+
+.social-buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+p {
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+a {
+	color: #007BFF;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.input-container {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.clear-button {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: none;
+}
+
+.clear-button::after {
+	content: '✕';
+	font-size: 14px;
+	color: #aaa;
+}
+
+.input-container input {
+	width: 100%;
+	padding-right: 30px;
+	/* 공간 확보 */
+}
+
+/*====================== 구글 로그인 버튼 ===================*/
+.google-login-button {
+	display: flex;
+	justify-content: center;
+	/* 수평 중앙 정렬 */
+	align-items: center;
+	/* 수직 중앙 정렬 */
+	padding: 8px 20px;
+	border: 1px solid rgb(182, 182, 182);
+	border-radius: 4px;
+	background-color: white;
+	color: rgb(128, 128, 128);
+	font-size: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s, box-shadow 0.3s;
+	width: 100%;
+	margin-top: 10px;
+	box-sizing: border-box;
+	font-weight: 600;
+}
+
+.google-login-button img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.google-login-button:hover {
+	background-color: #f1f1f1;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.google-login-button:active {
+	background-color: #e1e1e1;
+}
+
+/*====================== 네이버 로그인 버튼 ===================*/
+.naver-login-button {
+	display: flex;
+	justify-content: center;
+	/* 수평 중앙 정렬 */
+	align-items: center;
+	/* 수직 중앙 정렬 */
+	padding: 8px 20px;
+	border: 1px solid #03C75A;
+	background-color: #03C75A;
+	color: white;
+	font-size: 15px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s, box-shadow 0.3s;
+	width: 100%;
+	margin-top: 10px;
+	box-sizing: border-box;
+	font-weight: 600;
+}
+
+.naver-login-button img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.naver-login-button:hover {
+	background-color: #17b200;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.naver-login-button:active {
+	background-color: #149a00;
+}
+
+/*====================== 카카오 로그인 버튼 ===================*/
+.kakao-login-button {
+	display: flex;
+	justify-content: center;
+	/* 수평 중앙 정렬 */
+	align-items: center;
+	/* 수직 중앙 정렬 */
+	padding: 8px 20px;
+	border: 1px solid #FEE500;
+	background-color: #FEE500;
+	color: rgb(20, 20, 20);
+	font-size: 15px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s, box-shadow 0.3s;
+	width: 100%;
+	margin-top: 10px;
+	box-sizing: border-box;
+	font-weight: 600;
+}
+
+.kakao-login-button img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.kakao-login-button:hover {
+	background-color: #f9e002;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.kakao-login-button:active {
+	background-color: #e0cb00;
+}
+
+/* 미디어 쿼리 추가 */
+@media (max-width: 768px) {
+	.login-container {
+		/*		display: flex;*/
+		/*		justify-content: center;*/
+		/*		align-items: center;*/
+		width: 100%;
+		padding: 40px;
+		font-size: 20px;
+	}
+
+	.login-header h5 {
+		font-size: 18px;
+	}
+
+	input[type="text"],
+	input[type="password"] {
+		font-size: 18px;
+		padding: 12px;
+	}
+
+	.login-button {
+		font-size: 18px;
+		padding: 12px;
+	}
+
+	.google-login-button,
+	.naver-login-button,
+	.kakao-login-button {
+		font-size: 18px;
+		padding: 12px;
+	}
+
+	p {
+		font-size: 18px;
+	}
+
+	.help-links a {
+		font-size: 18px;
+	}
+}
+
+
+/*------------- Mobile -------------*/
+
+@media (min-width:300px) and (max-width:450px) {
+	
+    .login-container {
+        height: 700px;
+        max-width: 700px;
+        padding: 60px 20px;
+        font-size: 16px;
+    }
+
+	.login-header {
+	    display: flex;
+	    align-items: center;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    position: relative;
+	}
+
+	.login-header h5 {
+		font-size: 14px;
+	}
+
+	input[type="text"],
+	input[type="password"] {
+		font-size: 16px;
+		padding: 20px 10px;
+	}
+
+	.login-button {
+		font-size: 16px;
+		padding: 20px 10px;
+	}
+	
+	.help-links {
+	    text-align: center;
+	    margin-top: 15px;
+	    margin-bottom: 30px;
+	}
+
+	.google-login-button,
+	.naver-login-button,
+	.kakao-login-button {
+		font-size: 16px;
+		padding: 20px 10px;
+	}
+
+	p {
+		margin-top: 15px;
+		font-size: 16px;
+	}
+
+	.help-links a {
+		font-size: 16px;
+	}
+}

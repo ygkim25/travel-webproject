@@ -1,0 +1,49 @@
+<html>
+
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8" />
+    <title>아이디 찾기</title>
+    <link href="/assets/css/register.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="register-container">
+        <img src="/images/logo.png" alt="" width="250" height="50" />
+        <div class="register-header">
+            <span class="separator"></span>
+            <h5>아이디 찾기</h5>
+            <span class="separator"></span>
+        </div>
+        <form th:action="@{/main/find-email}" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="가입 하신 이름을 입력해주세요." class="form-control"><br />
+                <div th:if="${errorMessage}" th:text="${errorMessage}" class="password-error"></div>
+                <div th:if="${email}" th:text="'아이디 : '+ ${email}" class="find-success"></div>
+            </div>
+            <div>
+                <!-- type을 submit으로 변경 -->
+                <button type="submit" class="authentication-btn">아이디 찾기</button>
+            </div>
+        </form>
+        <form th:action="@{/main/login}">
+            <button type="submit" class="authentication-btn">로그인 하러가기</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        /*<![CDATA[*/
+        const email = /*[[${email}]]*/ 'null';
+        const errorMessage = /*[[${errorMessage}]]*/ 'null';
+        const username = /*[[${username}]]*/ 'null';
+
+        if (email !== 'null') {
+            alert('User ' + username + '\'s registered email is: ' + email);
+        } else if (errorMessage !== 'null') {
+            alert(errorMessage);
+        }
+        /*]]>*/
+    });
+</script>
+
+</html>

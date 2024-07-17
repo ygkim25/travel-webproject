@@ -1,0 +1,1162 @@
+/* 기본 스타일 */
+html {
+  background-color: #f7f9fc;
+
+}
+
+body {
+  padding-bottom: 3rem;
+  color: rgb(var(--bs-tertiary-color-rgb));
+  background-color: white;
+  max-width: 1325px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색의 반투명 배경 */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px; /* 원하는 여백 설정 */
+    max-width: 1325px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+
+.menu,
+.menu-btn {
+   display: none;
+}
+
+
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1325px;
+}
+
+.search-zone {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.main-zone {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.banner .mainLogo{
+   display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    width: 230px;
+    height: 46px;
+    margin-left: 170px;
+    margin-right: 300px;
+    
+}
+
+.banner #search-button {
+   font-size: 15px; /* 버튼 글꼴 크기 설정 */
+    margin-left: 10px; /* 버튼과 검색 입력 필드 사이의 여백 설정 */
+   margin-right: 50px;
+}
+
+/*.banner #login-button {
+   font-size: 15px;  버튼 글꼴 크기 설정 
+    margin-left: 10px;  버튼과 검색 입력 필드 사이의 여백 설정 
+    margin-right: 30px;
+}*/
+
+
+.banner input[type="search"] {
+    padding: 10px 12px; /* 내부 여백 설정 */
+    font-size: 18px; /* 글꼴 크기 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 둥글기 설정 */
+    outline: none; /* 포커스 시 테두리 제거 */
+}
+
+input[type="search"]::placeholder {
+    color: #999; /* placeholder(힌트 텍스트) 색상 설정 */
+}
+
+input[type="search"]:focus {
+    border-color: #66afe9; /* 포커스 시 테두리 색상 설정 */
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* 포커스 시 그림자 효과 설정 */
+}
+
+.banner form {
+    display: flex; /* 검색 입력 필드와 버튼을 한 줄에 정렬하기 위해 필요 */
+    align-items: center; /* 검색 입력 필드와 버튼을 세로 중앙 정렬 */
+}
+
+
+.banner .search-box {
+    font-size: 15px; /* 버튼 글꼴 크기 설정 */
+    margin-left: 10px; /* 버튼과 검색 입력 필드 사이의 여백 설정 */
+    margin-right: 50px; /* 검색창과 로그인 박스 사이의 간격 설정 (늘림) */
+}
+
+.banner .login-box {
+    font-size: 15px; /* 버튼 글꼴 크기 설정 */
+    margin-right: 30px; /* 검색창과 로그인 박스 사이의 간격 설정 (늘림) */
+}
+
+.banner .login-box a, .banner .login-box form {
+    color: white; /* 링크와 폼의 텍스트 색상 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    margin-left: 10px; /* 링크와 폼 사이의 간격 설정 */
+}
+
+header .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+
+
+
+.d-flex{
+   align-items: center;
+}
+.d-flex:hover{
+	cursor: pointer;
+	background-color: #f4f6fa;
+}
+.form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+.btn-outline-light {
+    border-color: #ccc;
+    color: #ccc;
+    white-space: nowrap;
+}
+
+.btn-outline-light:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.welcome-message {
+    cursor: pointer;
+    color: white;
+    display: inline-block;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.welcome-message:hover {
+    text-decoration: underline;
+}
+
+.container {
+   /*border: 1px solid #ccc;*/
+   border-radius: 5px;
+   padding-top: 25px;
+}
+.carousel-caption{
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	display: inline-block;
+	border-radius: 5px;
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* 기본 스타일 설정 */
+
+.row h3 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: #333;
+    font-size: 40px;
+    font-weight: 400;
+
+}
+
+/* 썸네일 레이아웃 스타일 */
+.boardFrame {
+    width: 100%;
+    /*max-width: 1000px;*/
+    margin: 20px auto;
+    padding: 0;
+    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #EFB4C1;
+    border-radius: 8px;
+    
+}
+
+.boardFrame tr {
+    border-bottom: 1px solid #ddd;
+   border-spacing: 30px;
+}
+
+.boardThumbnail {
+    display: flex;
+    width: 450px;
+    height: 400px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #FFEBCD;
+    border-radius: 5px;
+    flex-direction: column; /* 상하로 배치 */
+    
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.boardThumbnail :hover {
+   transform: scale(1.02); /* 호버 시 약간 확대 효과 */
+}
+
+.boardThumbnailImage {
+    flex: 1;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boardThumbnailImage img {
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.boardThumbnailContentBox {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column; /* 상하로 배치 */
+    margin-top: 10px;
+}
+
+.boardThumbnailTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.boardThumbnailLocation {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.boardThumbnailDate {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.boardThumbnailContent {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .boardThumbnail {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .boardThumbnailImage {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+/*------------------------------------------------------------------------------------------------------*/
+
+
+
+.diaryFrame {
+    width: 100%;
+    /*max-width: 1000px;*/
+    margin: 20px auto;
+    padding: 0;
+    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #EADBC8;
+    border-radius: 8px;
+    
+}
+
+.diaryFrame tr {
+    border-bottom: 1px solid #ddd;
+   border-spacing: 30px;
+}
+
+.diaryFrame td :hover {
+   transform: scale(1.02); /* 호버 시 약간 확대 효과 */
+}
+
+.diaryThumbnail {
+    display: flex;
+    width: 450px;
+    height: 400px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #FFEBCD;
+    border-radius: 5px;
+    flex-direction: column; /* 상하로 배치 */
+    
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.diaryThumbnailImage {
+    flex: 1;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.diaryThumbnailImage img {
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.diaryThumbnailContentBox {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: column; /* 상하로 배치 */
+    margin-top: 10px;
+}
+
+.diaryThumbnailTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.diaryThumbnailLocation {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.diaryThumbnailDate {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.diaryThumbnailContent {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .diaryThumbnail {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .diaryThumbnailImage {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+
+/*------------------------------------------------------------------------------------*/
+
+
+/* 전체 컨테이너 설정 */
+.container-mytravelDiary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-subject h3 {
+   text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: #333;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+/* 그리드 컨테이너 설정 */
+.grid-container {
+   display: grid;
+   border: 1px solid #ccc;
+    grid-template-columns: repeat(auto-fit, minmax(375px, 1fr)); /* 최소 300px 너비로 설정, 자동으로 그리드 배치 */
+    grid-gap: 20px; /* 간격 설정 */
+   min-width: 1200px;
+   background-color: white;
+   border-radius: 5px;
+   padding: 20px 0px;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    gap: 40px; /* 각 썸네일 사이의 간격 조절 */
+    padding: 3%;
+}
+
+/* 그리드 아이템 설정 */
+.grid-item {
+   width: 375px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    border-radius: 8px; /* 둥근 테두리 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+/* 썸네일 클릭 영역 설정 */
+.mainDiaryThumbnail {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 썸네일 이미지 설정 */
+.mainDiaryThumbnailImage img {
+    width: 100%;
+    height: auto;
+}
+
+/* 썸네일 콘텐츠 박스 설정 */
+.mainDiaryThumbnailContentBox {
+    padding: 10px;
+	box-shadow: 8px 8px 8px rgba(0, 0, 0.2, 0.2);
+}
+
+/* 썸네일 제목, 위치, 날짜, 내용 설정 */
+.mainDiaryThumbnailTitle,
+.mainDiaryThumbnailLocation,
+.mainDiaryThumbnailDate,
+.mainDiaryThumbnailContent {
+    margin-bottom: 1px;
+}
+
+
+
+
+.logout-mainDiaryThumnail-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.logout-mainDiaryThumnail {
+    width: 100%;
+    height: 100%;
+    filter: blur(5px);
+    background-color: #CCE5FF;
+    border-radius: 5px;
+    padding: 50px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.blur-text {
+    position: absolute; /* 절대 위치로 설정하여 블러 처리된 영역 위에 배치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: black; /* 텍스트 색상 설정 */
+    z-index: 1;
+    width: 100%; /* 텍스트가 중앙에 정렬되도록 */
+    padding: 0 20px; /* 텍스트와 링크가 잘 보이도록 패딩 추가 */
+}
+
+
+
+
+.logout-diary-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px; /* 상하 간격 설정 */
+    column-gap: 50px; /* 좌우 간격 설정 */
+    justify-content: center; /* 그리드 아이템을 가운데 정렬 */
+    padding: 20px;
+}
+
+.logout-diary-grid-item {
+    flex: 1 1 300px; /* 그리드 아이템의 크기를 조절합니다 */
+    max-width: 450px; /* 그리드 아이템의 최대 너비를 설정합니다 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 효과 */
+    border-radius: 10px; /* 모서리를 둥글게 설정 */
+    overflow: hidden; /* 콘텐츠가 넘칠 경우 숨김 */
+}
+
+.logout-diary-thumbnail {
+    cursor: pointer; /* 클릭 가능한 커서 */
+    background-color: #f9f9f9; /* 배경색 */
+    border-radius: 10px; /* 모서리를 둥글게 설정 */
+}
+
+.logout-thumbnail-image img {
+    width: 100%; /* 이미지가 그리드 아이템의 너비에 맞게 조절됩니다 */
+    height: auto; /* 이미지의 높이를 자동으로 조절 */
+    border-bottom: 1px solid #ddd; /* 이미지 하단에 구분선 추가 */
+}
+
+.logout-thumbnail-content-box {
+    padding: 15px;
+}
+
+.logout-thumbnail-title,
+.logout-thumbnail-location,
+.logout-thumbnail-date,
+.logout-thumbnail-content {
+    margin-bottom: 10px; /* 요소들 간의 간격 설정 */
+}
+
+.logout-thumbnail-title {
+    font-weight: bold; /* 제목 텍스트를 굵게 설정 */
+    font-size: 18px; /* 제목 텍스트의 크기 설정 */
+}
+
+.logout-thumbnail-location,
+.logout-thumbnail-date,
+.logout-thumbnail-content {
+    font-size: 14px; /* 기타 텍스트의 크기 설정 */
+    color: #555; /* 텍스트 색상 설정 */
+}
+
+
+.myDiaryDataEmpty {   
+   width: 100%;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.img {
+	flex-shrink: 0;
+	width: 100px;
+	height: 100px;
+	margin-right: 15px;
+}
+
+.img img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.content-container {
+	display: flex;
+	/*    flex-direction: column;*/
+	flex-grow: 1;
+	justify-content: space-between;
+	max-width: 100%; /* 부모 div의 너비를 넘지 않도록 설정 */
+	overflow: hidden;
+}
+
+.community-header {
+	display: flex;
+	/*    flex-direction: column;*/
+	flex-grow: 1;
+	justify-content: space-between;
+	padding: 2%;
+}
+
+.community-button {
+	text-decoration: none;
+	color: #666;
+}
+
+.community-button:hover {
+	text-decoration: underline;
+}
+
+.community-header h6 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #333;
+}
+
+/* 제목 스타일링 */
+.board-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden; /* 제목이 넘칠 경우 숨김 */
+}
+
+.board-title h6 {
+	justify-content: space-between;
+	font-size: 1.25rem;
+	font-weight: 400;
+	margin-bottom: 15px;
+	color: #333;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+/*	max-width: 50%;*/
+}
+
+.board-title .board-writer,
+.board-title .board-createdate {
+/*	max-width: 70%;*/
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 0.875rem;
+	color: #999;
+}
+
+.badge {
+	color: #999;
+}
+
+.board-count {
+	color: #999;
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.board-cnt {
+	color: #999;
+	display: flex;
+	align-items: center;
+}
+
+
+.go-post {
+	text-decoration: none;
+	/* 링크에 밑줄 제거 */
+}
+
+/*---------------------------------------------------메인 게시글 -----------------------------------------*/
+
+.community {
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
+	padding: 2%;
+}
+
+.community-all {
+	border-radius: 0.5rem;
+	border: 1px solid #ccc;
+	padding: 2%;
+	width: 50%;
+	margin-right: 1%;
+	background-color: white;
+}
+
+.community-top {
+	border-radius: 0.5rem;
+	border: 1px solid #ccc;
+	padding: 2%;
+	width: 50%;
+	background-color: white;
+	
+}
+
+
+/*------------------Mobile----------------------------------------------------------------------*/
+
+
+
+/* 기존 CSS 스타일들 */
+
+/* 모바일 반응형 디자인 */
+@media (min-width:300px) and (max-width:450px) {
+   
+   body {
+       padding: 0;
+       color: rgb(var(--bs-tertiary-color-rgb));
+       width: 100%;
+       background-size: cover;
+   }
+   
+    header {
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 450px;
+       z-index: 1000;
+       background-color: rgba(0, 0, 0, 0.5);
+       display: flex;
+       align-items: center;
+/*       justify-content: space-between;*/
+       padding: 10px 30px 10px 20px;
+       max-width: 412px;
+       width: 100%;
+       box-sizing: border-box; /* padding과 border를 포함한 전체 너비 설정 */
+   }
+   .community {
+		flex-direction: column;
+		width: 100%;
+		padding: 2%;
+	}
+
+	.community-all {
+		border-radius: 0.5rem;
+		border: 1px solid #ccc;
+		padding: 2%;
+		width: 100%;
+		
+	}
+	.community-top {
+		border-radius: 0.5rem;
+		border: 1px solid #ccc;
+		padding: 2%;
+		width: 100%;
+		
+	}
+
+    .banner {
+       display: flex;
+       justify-content: space-between;       
+       width: 95%;
+       
+   }
+   
+
+   
+   /* 햄버거 버튼 */
+   /* 햄버거 버튼 스타일링 */
+   .menu-btn {
+       display: inline-block;
+       position: relative;
+       width: 30px;
+       height: 30px;
+       cursor: pointer;
+   }
+   
+   .menu-btn span {
+       position: absolute;
+       clip: rect(0, 0, 0, 0);
+       width: 1px;
+       height: 1px;
+       margin: -1px;
+       border: 0;
+       padding: 0;
+       overflow: hidden;
+   }
+   
+   .menu-btn::before,
+   .menu-btn::after,
+   .menu-btn div {
+       content: '';
+       display: block;
+       width: 100%;
+       height: 4px;
+       background-color: #fff;
+       position: absolute;
+       transition: 0.3s ease;
+   }
+   
+   .menu-btn::before {
+       top: 0;
+   }
+   
+   .menu-btn::after {
+       bottom: 0;
+   }
+   
+   .menu-btn div {
+       top: 50%;
+       transform: translateY(-50%);
+   }
+   
+   /* 메뉴 스타일링 */
+   .menu {
+       display: none;
+       flex-direction: column;
+       align-items: flex-start;
+       background-color: rgba(0, 0, 0, 0.5);
+       width: 100%;
+       padding: 20px 0;
+       position: absolute;
+       top: 50px;
+       left: 0;
+       transition: max-height 0.3s ease-out;
+       overflow: hidden;
+       max-height: 0;
+   }
+   
+   .menu ul {
+       list-style: none;
+       padding: 0;
+       margin: 0;
+   }
+   
+   .menu ul li {
+       margin: 10px 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   .menu ul li a {
+       color: #fff;
+       text-decoration: none;
+   }
+   
+   /* 메뉴 보이기 */
+   .menu.show {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       max-height: 300px; /* 원하는 최대 높이로 조정 */
+   }
+   
+   #m-search-button,
+   #m-login-button,
+   #m-logout-button {
+      padding: 7px 15px;
+        font-size: 14px;
+   }
+   
+   
+   
+   .search-zone {
+      display: none;
+   }
+   
+   .banner .mainLogo{
+      display: flex;
+       align-items: center;
+       color: white;
+       /*flex-grow: 1;*/
+       justify-content: center;
+        justify-content: flex-start; /* 중앙 정렬을 왼쪽 정렬로 변경 */
+        margin-right: 106px;
+        margin-left: 0;
+      width: 130px;
+      height: 30px;   
+   }
+   
+    .banner #search-button,
+   .banner #logout-button {
+       font-size: 10px;
+       margin-left: 10px;
+       margin-right: 50px;
+       display: none;
+   }
+
+   .banner #login-button {
+      font-size: 10px;
+       margin-left: 30px;
+       margin-right: 50px;
+       display: none;
+   }
+
+    .banner input[type="search"] {
+        font-size: 16px; /* 글꼴 크기 축소 */
+        padding: 5px 10px; /* 내부 여백 축소 */
+        width: 100%; /* 검색창 너비 조정 */
+        margin-bottom: 10px; /* 하단 여백 추가 */
+        margin-right: 10px;
+    }
+
+    .banner .search-box,
+    .banner .login-box {
+        font-size: 12px; /* 글꼴 크기 축소 */
+        margin-right: 10px; /* 여백 축소 */
+    }
+
+    .container {
+        padding: 10px; /* 여백 축소 */
+    }
+
+    .row h3 {
+        font-size: 30px; /* 글꼴 크기 축소 */
+        padding: 5px 20px; /* 여백 축소 */
+    }
+
+    .boardFrame,
+    .diaryFrame {
+        border-spacing: 0 10px; /* 여백 축소 */
+    }
+
+    .boardThumbnail,
+    .diaryThumbnail {
+        width: 100%; /* 너비 조정 */
+        height: auto; /* 높이 자동 조정 */
+        padding: 10px; /* 내부 여백 축소 */
+    }
+
+    .boardThumbnailImage img,
+    .diaryThumbnailImage img {
+        width: 100%; /* 이미지 너비 조정 */
+        height: auto; /* 이미지 높이 자동 조정 */
+    }
+
+    .container-mytravelDiary {
+        padding: 10px; /* 여백 축소 */
+    }
+
+    .container-subject h3 {
+        font-size: 30px; /* 글꼴 크기 축소 */
+        padding: 5px 20px; /* 여백 축소 */
+    }
+
+    .grid-container {
+		display: flex;
+		flex-direction: column;
+        padding: 10px 0; /* 여백 축소 */
+        gap: 20px; /* 간격 축소 */
+		max-width: 50%;
+        align-content: center;
+        
+    }
+
+    .grid-item {
+        width: 100%; /* 너비 조정 */
+        margin-bottom: 20px; /* 하단 여백 추가 */
+    }
+
+    .logout-mainDiaryThumnail-container {
+        padding: 20px 0; /* 여백 축소 */
+    }
+
+    .logout-mainDiaryThumnail {
+        padding: 20px 0; /* 여백 축소 */
+    }
+
+    .logout-diary-grid-container {
+        padding: 10px; /* 여백 축소 */
+        gap: 20px; /* 간격 축소 */
+    }
+
+    .logout-diary-grid-item {
+        flex: 1 1 100%; /* 너비 조정 */
+        margin-bottom: 20px; /* 하단 여백 추가 */
+    }
+
+    .logout-thumbnail-image img {
+        width: 100%; /* 이미지 너비 조정 */
+        height: auto; /* 이미지 높이 자동 조정 */
+    }
+    
+    
+    
+    
+    
+   /* MyTravelDiary 전체 컨테이너 설정 */
+   .container-mytravelDiary {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       width: 100%;
+   }
+   
+   .container-subject h3 {
+      width: 100%;
+      margin: 20px 0px;
+      font-size: 35px;
+      font-weight: 400;
+   }
+   
+   /* 그리드 컨테이너 설정 */
+   .grid-container {
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid #333;
+      padding: 20px 0px;
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       gap: 40px; /* 각 썸네일 사이의 간격 조절 */
+   }
+   
+   /* 그리드 아이템 설정 */
+   .grid-item {
+       width: calc(42% - 20px); /* 반응형으로 2개씩 배치, 간격 조절 */
+       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+       border-radius: 8px; /* 둥근 테두리 */
+       overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+   }
+   
+   /* 썸네일 클릭 영역 설정 */
+   .mainDiaryThumbnail {
+       cursor: pointer;
+       display: flex;
+       flex-direction: column;
+   }
+   
+   /* 썸네일 이미지 설정 */
+   .mainDiaryThumbnailImage img {
+       width: 100%;
+       height: auto;
+   }
+   
+   /* 썸네일 콘텐츠 박스 설정 */
+   .mainDiaryThumbnailContentBox {
+       padding: 10px;
+   }
+   
+   /* 썸네일 제목, 위치, 날짜, 내용 설정 */
+   .mainDiaryThumbnailTitle{
+      font-size: 13px;
+   }
+   .mainDiaryThumbnailLocation,
+   .mainDiaryThumbnailDate,
+   .mainDiaryThumbnailContent {
+       font-size: 12px;
+       
+   }
+    
+   
+   
+   
+   
+   .logout-mainDiaryThumnail-container {
+       position: relative;
+       width: 100%;
+       height: 100%;
+   }
+   
+   .logout-mainDiaryThumnail {
+       width: 100%;
+       height: 100%;
+       filter: blur(5px);
+       background-color: #CCE5FF;
+       border-radius: 5px;
+       padding: 0;
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+   }
+   
+   .blur-text {
+       position: absolute; /* 절대 위치로 설정하여 블러 처리된 영역 위에 배치 */
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       text-align: center;
+       font-size: 23px;
+       font-weight: 600;
+       color: black; /* 텍스트 색상 설정 */
+       z-index: 1;
+       width: 100%; /* 텍스트가 중앙에 정렬되도록 */
+       padding: 0 20px; /* 텍스트와 링크가 잘 보이도록 패딩 추가 */
+   }
+   
+   .myDiaryDataEmpty h1{
+      font-size: 12px;
+   }
+   
+   .myDiaryDataEmpty h4{
+      width: 100px;
+   }
+   
+   .myDiaryDataEmpty a{
+      font-size: 10px;
+   }
+   
+   .logout-diary-grid-container {
+       display: flex;
+       flex-wrap: wrap;
+       row-gap: 30px; /* 상하 간격 설정 */
+       column-gap: 50px; /* 좌우 간격 설정 */
+       justify-content: center; /* 그리드 아이템을 가운데 정렬 */
+       padding: 20px;
+   }
+   
+   .logout-diary-grid-item {
+       flex: 1 1 300px; /* 그리드 아이템의 크기를 조절합니다 */
+       max-width: 125px; /* 그리드 아이템의 최대 너비를 설정합니다 */
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 효과 */
+       border-radius: 10px; /* 모서리를 둥글게 설정 */
+       overflow: hidden; /* 콘텐츠가 넘칠 경우 숨김 */
+   }
+   
+   .logout-diary-thumbnail {
+       cursor: pointer; /* 클릭 가능한 커서 */
+       background-color: #f9f9f9; /* 배경색 */
+       border-radius: 10px; /* 모서리를 둥글게 설정 */
+   }
+   
+   .logout-thumbnail-image img {
+       width: 100%; /* 이미지가 그리드 아이템의 너비에 맞게 조절됩니다 */
+       height: auto; /* 이미지의 높이를 자동으로 조절 */
+       border-bottom: 1px solid #ddd; /* 이미지 하단에 구분선 추가 */
+   }
+   
+   .logout-thumbnail-content-box {
+       padding: 15px;
+   }
+   
+   .logout-thumbnail-title,
+   .logout-thumbnail-location,
+   .logout-thumbnail-date,
+   .logout-thumbnail-content {
+       margin-bottom: 10px; /* 요소들 간의 간격 설정 */
+   }
+   
+   .logout-thumbnail-title {
+       font-weight: bold; /* 제목 텍스트를 굵게 설정 */
+       font-size: 18px; /* 제목 텍스트의 크기 설정 */
+   }
+   
+   .logout-thumbnail-location,
+   .logout-thumbnail-date,
+   .logout-thumbnail-content {
+       font-size: 14px; /* 기타 텍스트의 크기 설정 */
+       color: #555; /* 텍스트 색상 설정 */
+   }
+
+}
+
+
